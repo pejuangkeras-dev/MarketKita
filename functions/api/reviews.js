@@ -40,7 +40,7 @@ export async function onRequestGet({request,env}){
     if(type==="seller"&&!storeId)
       return json({reviews:[],summary:{rating:0,count:0},canReview:false})
 
-    let path="/rest/v1/product_reviews?select=id,order_id,order_item_id,product_id,buyer_id,store_id,rating,review_text,seller_reply,seller_replied_at,created_at,updated_at&order=created_at.desc&limit=100"
+    let path="/rest/v1/product_reviews?select=id,order_id,order_item_id,product_id,buyer_id,store_id,rating,review_text,seller_reply,seller_replied_at,created_at&order=created_at.desc&limit=100"
     if(type==="product"&&productId)path+="&product_id=eq."+encodeURIComponent(productId)
     if(type==="seller"&&storeId)path+="&store_id=eq."+encodeURIComponent(storeId)
 
@@ -59,8 +59,7 @@ export async function onRequestGet({request,env}){
     const decorated=reviews.map(x=>({
       ...x,
       reviewer_name:names.get(String(x.buyer_id))||"Pembeli",
-      comment:x.review_text||"",
-      verified_purchase:true
+      comment:x.review_text||""
     }))
     const rating=decorated.length
       ? decorated.reduce((a,x)=>a+Number(x.rating||0),0)/decorated.length
