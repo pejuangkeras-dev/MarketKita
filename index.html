@@ -4998,7 +4998,36 @@ window.selectCheckoutPayment=function(btn){
  btn.classList.add("active");const i=btn.querySelector("i");if(i)i.textContent="●";
  window.checkoutPaymentMethod=btn.dataset.payment||"bank";
 };
-</script></head>
+</script><style id="marketkita-p1-homepage">
+/* P1 — Homepage marketplace behavior and visual polish */
+.mk2-store-section{padding:18px 0 30px}
+.mk2-store-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.mk2-store-card{background:#fff;border:1px solid var(--a-line);border-radius:12px;padding:12px;box-shadow:0 3px 10px rgba(30,73,130,.04);transition:.18s;min-width:0}
+.mk2-store-card:hover{transform:translateY(-2px);border-color:#bcd5f4;box-shadow:0 10px 22px rgba(30,73,130,.09)}
+.mk2-store-top{display:flex;align-items:center;gap:9px}
+.mk2-store-avatar{width:42px;height:42px;flex:0 0 42px;border-radius:12px;background:linear-gradient(135deg,#1769e8,#5aa6ff);color:#fff;display:grid;place-items:center;font-weight:950;font-size:17px}
+.mk2-store-name{min-width:0}
+.mk2-store-name strong{display:block;color:var(--a-navy);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mk2-store-name span{display:block;color:#8292a8;font-size:7px;margin-top:3px}
+.mk2-store-rating{margin-top:9px;font-size:8px;color:#71839a}
+.mk2-store-rating b{color:#1769e8}
+.mk2-store-products{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:9px}
+.mk2-store-products img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:7px;background:#f4f7fa}
+.mk2-store-btn{width:100%;height:29px;margin-top:9px;border:1px solid #cfe1f8;border-radius:7px;background:#eef6ff;color:#1769e8;font-size:8px;font-weight:900}
+.mk2-store-btn:hover{background:#1769e8;color:#fff}
+.mk2-store-loading{grid-column:1/-1;padding:24px;text-align:center;background:#fff;border:1px dashed var(--a-line);border-radius:11px;color:#8292a8;font-size:9px}
+.mk2-sale-loading{min-height:210px}
+.mk2-sale-loading .mk2-sale-photo{height:130px;background:linear-gradient(90deg,#f2f6fa 25%,#e9eff5 37%,#f2f6fa 63%);background-size:400% 100%;animation:mk2Shimmer 1.4s infinite}
+@keyframes mk2Shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
+.mk2-flash .mk2-sale-card{cursor:pointer}
+.mk2-flash .mk2-sale-card:hover{transform:translateY(-2px);box-shadow:0 9px 20px rgba(30,73,130,.09)}
+.mk2-flash .mk2-sale-card .discount.mk2-no-discount{background:#1769e8}
+.mk2-sale-body .mk2-sale-store{display:block;margin-top:4px;font-size:7px;color:#7b8ca2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mk2-sale-body .mk2-sale-rating{font-size:7px;color:#71839a;margin-top:3px}
+@media(max-width:1200px){.mk2-store-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.mk2-store-grid{display:flex;overflow-x:auto;gap:7px;scrollbar-width:none}.mk2-store-grid::-webkit-scrollbar{display:none}.mk2-store-card{flex:0 0 205px}.mk2-store-section{padding-top:10px}}
+</style>
+</head>
 
 <body>
 <header class="mk2-header">
@@ -5134,19 +5163,30 @@ window.selectCheckoutPayment=function(btn){
     <div class="mk2-trust-item"><span class="mk2-trust-icon">🏪</span><div><strong>Banyak Pilihan Toko</strong><span>Dari UMKM hingga brand</span></div></div>
   </div>
 
-  <section class="mk2-flash" aria-label="Flash Sale">
-    <div class="mk2-flash-head"><div class="mk2-flash-title"><h2>⚡ Flash Sale</h2><div class="mk2-timer"><b>06</b><b>:</b><b>24</b><b>:</b><b>18</b></div></div><a class="mk2-see" href="#produk">Lihat Semua Produk ›</a></div>
-    <div class="mk2-flash-grid">
-      <div class="mk2-sale-card"><span class="discount">-45%</span><div class="mk2-sale-photo"><img src="https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=500&q=78" alt="TWS"></div><div class="mk2-sale-body"><strong>TWS Bluetooth 5.3 Noise Cancellation</strong><div class="mk2-price">Rp 179.000</div><div class="mk2-old">Rp 329.000</div><div class="mk2-sold">120+ terjual</div></div></div>
-      <div class="mk2-sale-card"><span class="discount">-32%</span><div class="mk2-sale-photo"><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=500&q=78" alt="Tas"></div><div class="mk2-sale-body"><strong>Tas Ransel Laptop Waterproof</strong><div class="mk2-price">Rp 149.000</div><div class="mk2-old">Rp 219.000</div><div class="mk2-sold">85+ terjual</div></div></div>
-      <div class="mk2-sale-card"><span class="discount">-50%</span><div class="mk2-sale-photo"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=78" alt="Smartwatch"></div><div class="mk2-sale-body"><strong>Smartwatch AMOLED 1.85"</strong><div class="mk2-price">Rp 399.000</div><div class="mk2-old">Rp 799.000</div><div class="mk2-sold">200+ terjual</div></div></div>
-      <div class="mk2-sale-card"><span class="discount">-40%</span><div class="mk2-sale-photo"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=78" alt="Sneakers"></div><div class="mk2-sale-body"><strong>Sepatu Sneakers Pria Casual</strong><div class="mk2-price">Rp 239.000</div><div class="mk2-old">Rp 399.000</div><div class="mk2-sold">150+ terjual</div></div></div>
-      <div class="mk2-sale-card"><span class="discount">-35%</span><div class="mk2-sale-photo"><img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=500&q=78" alt="Skincare"></div><div class="mk2-sale-body"><strong>Skincare Glow Set 5in1</strong><div class="mk2-price">Rp 129.000</div><div class="mk2-old">Rp 199.000</div><div class="mk2-sold">90+ terjual</div></div></div>
-      <div class="mk2-sale-card"><span class="discount">-28%</span><div class="mk2-sale-photo"><img src="https://images.unsplash.com/photo-1585515320310-259814833e62?auto=format&fit=crop&w=500&q=78" alt="Air fryer"></div><div class="mk2-sale-body"><strong>Air Fryer 5L Low Watt</strong><div class="mk2-price">Rp 449.000</div><div class="mk2-old">Rp 629.000</div><div class="mk2-sold">60+ terjual</div></div></div>
-      <div class="mk2-sale-card"><span class="discount">-41%</span><div class="mk2-sale-photo"><img src="https://images.unsplash.com/photo-1584184805815-d2f0d9f4e4b2?auto=format&fit=crop&w=500&q=78" alt="Hijab"></div><div class="mk2-sale-body"><strong>Hijab Premium Segi Empat</strong><div class="mk2-price">Rp 59.000</div><div class="mk2-old">Rp 99.000</div><div class="mk2-sold">300+ terjual</div></div></div>
-      <div class="mk2-sale-card"><span class="discount">-37%</span><div class="mk2-sale-photo"><img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=500&q=78" alt="Panci"></div><div class="mk2-sale-body"><strong>Panci Granite Set Anti Lengket</strong><div class="mk2-price">Rp 299.000</div><div class="mk2-old">Rp 479.000</div><div class="mk2-sold">75+ terjual</div></div></div>
+  <section class="mk2-flash" aria-label="Promo dan produk pilihan">
+    <div class="mk2-flash-head">
+      <div class="mk2-flash-title">
+        <h2 id="mk2FlashTitle">⚡ Promo &amp; Produk Pilihan</h2>
+        <div class="mk2-timer" id="mk2FlashTimer" aria-label="Periode pilihan berikutnya"></div>
+      </div>
+      <a class="mk2-see" href="#produk">Lihat Semua Produk ›</a>
+    </div>
+    <div id="mk2FlashProducts" class="mk2-flash-grid">
+      <div class="mk2-sale-card mk2-sale-loading"><div class="mk2-sale-photo"></div><div class="mk2-sale-body"><strong>Memuat produk pilihan...</strong></div></div>
     </div>
   </section>
+</section>
+
+<section id="mk2FeaturedStores" class="mk2-store-section">
+  <div class="container">
+    <div class="mk2-section-head">
+      <div><div class="mk2-kicker">MARKETKITA</div><h2>Toko Pilihan</h2></div>
+      <a class="mk2-see" href="#produk">Lihat Produk ›</a>
+    </div>
+    <div id="mk2FeaturedStoreGrid" class="mk2-store-grid">
+      <div class="mk2-store-loading">Memuat toko pilihan...</div>
+    </div>
+  </div>
 </section>
 
 <section id="produk" class="mk2-products-section">
@@ -10680,5 +10720,113 @@ body.mk-cart-open{overflow:hidden!important}
   #checkoutModal .checkout-shipping-options,#checkoutModal .mk-payment-grid{grid-template-columns:1fr!important}
 }
 </style>
+<script id="marketkita-p1-homepage-js">
+(function(){
+  let p1LastFlashSignature="";
+  let p1TimerInterval=null;
+
+  window.selectHomepageCategory=function(category,event){
+    if(event)event.preventDefault();
+    const value=String(category||"").trim();
+    const cat=document.getElementById("marketplaceCategory");
+    const input=document.getElementById("marketplaceSearch");
+    if(cat){
+      const option=[...cat.options].find(o=>String(o.value).toLowerCase()===value.toLowerCase());
+      cat.value=option?option.value:"";
+      cat.dispatchEvent(new Event("change",{bubbles:true}));
+    }
+    if(input&&(!optionExists(cat,value))) input.value="";
+    document.getElementById("produk")?.scrollIntoView({behavior:"smooth",block:"start"});
+  };
+  function optionExists(select,value){
+    if(!select||!value)return false;
+    return [...select.options].some(o=>String(o.value).toLowerCase()===String(value).toLowerCase());
+  }
+  function safeImage(p){
+    const src=typeof optimizeProductImage==="function"?optimizeProductImage(p?.img||"",360,360,70):(p?.img||"");
+    return src||"";
+  }
+  function renderP1Flash(){
+    const root=document.getElementById("mk2FlashProducts");
+    if(!root||!Array.isArray(window.products)||!window.products.length)return false;
+    const rows=window.products.slice().sort((a,b)=>{
+      const ar=Number(a.productRating||0),br=Number(b.productRating||0);
+      const av=Number(a.reviewCount||0),bv=Number(b.reviewCount||0);
+      return (br*10+Math.min(bv,50))-(ar*10+Math.min(av,50));
+    }).slice(0,8);
+    const sig=rows.map(p=>String(p.id)).join("|");
+    if(sig===p1LastFlashSignature)return true;
+    p1LastFlashSignature=sig;
+    root.innerHTML=rows.map(p=>{
+      const i=window.products.indexOf(p);
+      const rating=Number(p.productRating||0),reviews=Number(p.reviewCount||0);
+      const badge=String(p.badge||"").match(/\d+/)?.[0]||"";
+      return '<article class="mk2-sale-card" onclick="openProductDetail('+i+')">'+
+        (badge?'<span class="discount">-'+escDetail(badge)+'%</span>':'<span class="discount mk2-no-discount">Pilihan</span>')+
+        '<div class="mk2-sale-photo"><img src="'+escDetail(safeImage(p))+'" data-fallback-src="'+escDetail(p.img||"")+'" loading="lazy" decoding="async" alt="'+escDetail(p.name||"Produk")+'"></div>'+
+        '<div class="mk2-sale-body"><strong>'+escDetail(p.name||"Produk")+'</strong><div class="mk2-price">'+rupiah(p.price)+'</div>'+
+        (badge?'<div class="mk2-old">Promo '+escDetail(badge)+'%</div>':'<div class="mk2-old">Harga marketplace</div>')+
+        '<div class="mk2-sale-rating">★ '+(rating?rating.toFixed(1):"—")+' · '+reviews+' ulasan</div>'+
+        '<span class="mk2-sale-store">🏪 '+escDetail(p.store?.name||"MarketKita Store")+'</span></div></article>';
+    }).join("");
+    return true;
+  }
+  function startP1Timer(){
+    const root=document.getElementById("mk2FlashTimer"); if(!root)return;
+    clearInterval(p1TimerInterval);
+    function tick(){
+      const now=new Date(), next=new Date(now);
+      const nextBlock=Math.ceil((now.getHours()+1)/6)*6;
+      next.setHours(nextBlock,0,0,0);
+      if(next<=now)next.setDate(next.getDate()+1);
+      let sec=Math.max(0,Math.floor((next-now)/1000));
+      const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60;
+      root.innerHTML='<b>'+String(h).padStart(2,"0")+'</b><b>:</b><b>'+String(m).padStart(2,"0")+'</b><b>:</b><b>'+String(s).padStart(2,"0")+'</b>';
+      root.setAttribute("aria-label","Pilihan diperbarui dalam "+h+" jam "+m+" menit");
+    }
+    tick();p1TimerInterval=setInterval(tick,1000);
+  }
+  function renderP1Stores(){
+    const root=document.getElementById("mk2FeaturedStoreGrid");
+    if(!root||!Array.isArray(window.products)||!window.products.length)return false;
+    const map=new Map();
+    window.products.forEach(p=>{
+      const st=p.store;
+      if(!st?.slug)return;
+      const key=String(st.slug);
+      if(!map.has(key))map.set(key,{store:st,products:[],rating:0,reviews:0});
+      const row=map.get(key);
+      row.products.push(p);
+      row.rating=Math.max(row.rating,Number(p.sellerRating||0));
+      row.reviews+=Number(p.sellerReviewCount||0);
+    });
+    const stores=[...map.values()].sort((a,b)=>(b.rating*10+b.reviews)-(a.rating*10+a.reviews)).slice(0,5);
+    if(!stores.length)return false;
+    root.innerHTML=stores.map(x=>{
+      const name=x.store.name||"MarketKita Store",initial=name.trim().charAt(0).toUpperCase()||"M";
+      const imgs=x.products.slice(0,3).map(p=>'<img src="'+escDetail(safeImage(p))+'" data-fallback-src="'+escDetail(p.img||"")+'" loading="lazy" alt="'+escDetail(p.name||"Produk")+'">').join("");
+      return '<article class="mk2-store-card"><a href="/store.html?slug='+encodeURIComponent(x.store.slug)+'">'+
+        '<div class="mk2-store-top"><div class="mk2-store-avatar">'+escDetail(initial)+'</div><div class="mk2-store-name"><strong>'+escDetail(name)+'</strong><span>Official Seller Store</span></div></div>'+
+        '<div class="mk2-store-rating"><b>★ '+(x.rating?x.rating.toFixed(1):"Baru")+'</b> · '+x.products.length+' produk · '+x.reviews+' ulasan</div>'+
+        '<div class="mk2-store-products">'+imgs+'</div><button type="button" class="mk2-store-btn" onclick="event.preventDefault();location.href=\'/store.html?slug='+encodeURIComponent(x.store.slug)+'\'">Kunjungi Toko</button></a></article>';
+    }).join("");
+    return true;
+  }
+  function refreshP1(){
+    if(!Array.isArray(window.products)||!window.products.length)return;
+    renderP1Flash();renderP1Stores();
+  }
+  function boot(){
+    startP1Timer();
+    refreshP1();
+    let tries=0;
+    const timer=setInterval(()=>{
+      refreshP1();
+      if(++tries>60)clearInterval(timer);
+    },500);
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+})();
+</script>
 </body>
 </html>
