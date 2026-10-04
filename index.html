@@ -10748,8 +10748,8 @@ body.mk-cart-open{overflow:hidden!important}
   }
   function renderP1Flash(){
     const root=document.getElementById("mk2FlashProducts");
-    if(!root||!Array.isArray(window.products)||!window.products.length)return false;
-    const rows=window.products.slice().sort((a,b)=>{
+    if(!root||!Array.isArray(products)||!products.length)return false;
+    const rows=products.slice().sort((a,b)=>{
       const ar=Number(a.productRating||0),br=Number(b.productRating||0);
       const av=Number(a.reviewCount||0),bv=Number(b.reviewCount||0);
       return (br*10+Math.min(bv,50))-(ar*10+Math.min(av,50));
@@ -10758,7 +10758,7 @@ body.mk-cart-open{overflow:hidden!important}
     if(sig===p1LastFlashSignature)return true;
     p1LastFlashSignature=sig;
     root.innerHTML=rows.map(p=>{
-      const i=window.products.indexOf(p);
+      const i=products.indexOf(p);
       const rating=Number(p.productRating||0),reviews=Number(p.reviewCount||0);
       const badge=String(p.badge||"").match(/\d+/)?.[0]||"";
       return '<article class="mk2-sale-card" onclick="openProductDetail('+i+')">'+
@@ -10788,9 +10788,9 @@ body.mk-cart-open{overflow:hidden!important}
   }
   function renderP1Stores(){
     const root=document.getElementById("mk2FeaturedStoreGrid");
-    if(!root||!Array.isArray(window.products)||!window.products.length)return false;
+    if(!root||!Array.isArray(products)||!products.length)return false;
     const map=new Map();
-    window.products.forEach(p=>{
+    products.forEach(p=>{
       const st=p.store;
       if(!st?.slug)return;
       const key=String(st.slug);
@@ -10813,7 +10813,7 @@ body.mk-cart-open{overflow:hidden!important}
     return true;
   }
   function refreshP1(){
-    if(!Array.isArray(window.products)||!window.products.length)return;
+    if(!Array.isArray(products)||!products.length)return;
     renderP1Flash();renderP1Stores();
   }
   function boot(){
