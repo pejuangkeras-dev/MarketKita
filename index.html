@@ -7042,7 +7042,12 @@ function removeItem(i){
 }
 
 function toggleCart(){
-  document.getElementById("drawer")?.classList.toggle("show");
+  const drawer=document.getElementById("drawer");
+  if(!drawer)return;
+  const opening=!drawer.classList.contains("show");
+  drawer.classList.toggle("show",opening);
+  document.body.classList.toggle("mk-cart-open",opening);
+  drawer.setAttribute("aria-hidden",opening?"false":"true");
   updateCart();
 }
 
@@ -10784,5 +10789,60 @@ html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!impo
 #checkoutModal .kw-co-items{grid-row:2!important}
 @media(max-width:1000px){#checkoutModal .kw-co-items{grid-row:2!important}#checkoutModal .kw-co-section:nth-of-type(2){grid-row:3!important}#checkoutModal .kw-co-shipping{grid-row:4!important}#checkoutModal .kw-co-payment{grid-row:5!important}#checkoutModal .kw-co-voucher-final{grid-row:6!important}}
 @media(max-width:700px){#locationPickerModal.kw-location-modal{padding:0!important;align-items:flex-end!important}#locationPickerModal .kw-location-dialog{width:100vw!important;max-height:90dvh!important;border-radius:16px 16px 0 0!important}}
+</style><style id="marketkita-cart-layer-final-20261004">
+/* FINAL CART DRAWER LAYER
+   The cart owns the viewport while open. Site header and floating CS must never
+   cover the drawer's controls. The cart panel itself is independently scrollable. */
+body.mk-cart-open{overflow:hidden!important}
+#drawer{
+  position:fixed!important;
+  inset:0!important;
+  z-index:2147482000!important;
+  width:100vw!important;
+  height:100dvh!important;
+  overflow:hidden!important;
+}
+#drawer .drawer-panel{
+  position:absolute!important;
+  top:0!important;
+  right:0!important;
+  bottom:0!important;
+  height:100dvh!important;
+  max-height:100dvh!important;
+  overflow:hidden!important;
+  z-index:2!important;
+  box-sizing:border-box!important;
+  padding-bottom:0!important;
+}
+#drawer .cart-items{
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain!important;
+  padding-bottom:18px!important;
+}
+#drawer .drawer-panel > :last-child{
+  flex:0 0 auto!important;
+  position:relative!important;
+  z-index:5!important;
+}
+#drawer .checkout-btn{
+  position:relative!important;
+  z-index:10!important;
+  pointer-events:auto!important;
+}
+#drawer.show ~ #mk2CustomerService{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  transform:translateY(8px)!important;
+}
+#mk2CustomerService{z-index:2147481000!important}
+@media(max-width:700px){
+  #drawer .drawer-panel{
+    width:100vw!important;
+    max-width:100vw!important;
+  }
+}
 </style></body>
 </html>
