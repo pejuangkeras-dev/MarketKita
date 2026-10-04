@@ -11099,5 +11099,451 @@ body.mk-cart-open{overflow:hidden!important}
     max-width:100vw!important;
   }
 }
-</style></body>
+</style><style id="marketkita-checkout-authoritative-reference">
+/* AUTHORITATIVE CHECKOUT REFERENCE OVERRIDE
+   Must remain last so older checkout patches cannot override the reference layout. */
+html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!important}
+body:has(#checkoutModal.show)>.mk2-header,
+body:has(#checkoutModal.show) header.mk2-header,
+body:has(#checkoutModal.show) .mk2-nav{z-index:2147482500!important}
+
+#checkoutModal.kw-checkout-modal{
+  position:fixed!important;
+  inset:112px 0 0 0!important;
+  width:100vw!important;
+  height:calc(100dvh - 112px)!important;
+  padding:0!important;
+  margin:0!important;
+  display:none!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  background:#eef7ff!important;
+  backdrop-filter:none!important;
+  z-index:2147482000!important;
+}
+#checkoutModal.kw-checkout-modal.show{display:flex!important}
+
+#checkoutModal .kw-checkout-box{
+  position:relative!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:100%!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0 40px 34px!important;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 475px!important;
+  grid-template-rows:auto auto auto auto auto!important;
+  grid-template-areas:
+    "head head"
+    "address summary"
+    "shipping summary"
+    "payment trust"
+    "voucher total"!important;
+  column-gap:18px!important;
+  row-gap:12px!important;
+  align-content:start!important;
+  align-items:start!important;
+  overflow:visible!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Header */
+#checkoutModal .kw-co-head{
+  grid-area:head!important;
+  width:100%!important;
+  min-height:106px!important;
+  margin:0!important;
+  padding:18px 0 14px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  background:transparent!important;
+  border:0!important;
+  border-bottom:1px solid #d7e6f3!important;
+}
+#checkoutModal .kw-co-head>div{display:block!important}
+#checkoutModal .kw-co-head>div>span{
+  display:block!important;
+  color:#1769e8!important;
+  font-size:9px!important;
+  font-weight:900!important;
+  letter-spacing:.14em!important;
+}
+#checkoutModal .kw-co-head h3{
+  margin:3px 0 4px!important;
+  color:#071f54!important;
+  font-size:28px!important;
+  line-height:1.05!important;
+  letter-spacing:-.035em!important;
+}
+#checkoutModal .kw-co-head p{
+  margin:0!important;
+  color:#647c99!important;
+  font-size:12px!important;
+}
+#checkoutModal .kw-co-head:after{
+  content:"1   Alamat     →     2   Pengiriman     →     3   Pembayaran     →     4   Selesai"!important;
+  display:block!important;
+  margin-left:auto!important;
+  padding:0 12px!important;
+  color:#102b55!important;
+  font-size:11px!important;
+  font-weight:850!important;
+  white-space:nowrap!important;
+}
+#checkoutModal .kw-co-head .close-btn{
+  position:static!important;
+  width:34px!important;
+  height:34px!important;
+  flex:0 0 34px!important;
+  margin-left:10px!important;
+  border-radius:50%!important;
+  background:#edf4fb!important;
+  border:1px solid #d6e3ef!important;
+  color:#526b87!important;
+}
+
+/* Hide legacy recipient block but do not let it consume a grid row */
+#checkoutModal .kw-co-recipient{
+  display:none!important;
+  grid-area:none!important;
+}
+
+/* All primary panels */
+#checkoutModal .kw-co-section{
+  width:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:17px 20px!important;
+  background:#fff!important;
+  border:1px solid #d8e6f3!important;
+  border-radius:14px!important;
+  box-shadow:0 4px 16px rgba(28,76,120,.045)!important;
+}
+
+/* IMPORTANT: override every previous nth-of-type/grid-row patch */
+#checkoutModal .kw-co-section:nth-of-type(2){
+  grid-area:address!important;
+  grid-row:auto!important;
+  grid-column:auto!important;
+}
+#checkoutModal .kw-co-shipping{
+  grid-area:shipping!important;
+  grid-row:auto!important;
+  grid-column:auto!important;
+}
+#checkoutModal .kw-co-payment{
+  grid-area:payment!important;
+  grid-row:auto!important;
+  grid-column:auto!important;
+}
+#checkoutModal .kw-co-voucher-final{
+  grid-area:voucher!important;
+  grid-row:auto!important;
+  grid-column:auto!important;
+}
+
+/* Section titles */
+#checkoutModal .kw-co-title{
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  margin:0 0 12px!important;
+}
+#checkoutModal .kw-co-title>b{
+  width:38px!important;
+  height:38px!important;
+  flex:0 0 38px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:50%!important;
+  background:#1769e8!important;
+  color:#fff!important;
+  font-size:14px!important;
+  font-weight:900!important;
+}
+#checkoutModal .kw-co-title strong{
+  display:block!important;
+  color:#081f56!important;
+  font-size:17px!important;
+  line-height:1.1!important;
+  font-weight:900!important;
+}
+#checkoutModal .kw-co-title small{
+  display:block!important;
+  margin-top:3px!important;
+  color:#667c98!important;
+  font-size:10px!important;
+}
+
+/* Address */
+#checkoutModal .kw-co-section .field{margin:0 0 8px!important}
+#checkoutModal .kw-co-section label{
+  display:block!important;
+  margin:0 0 5px!important;
+  color:#19355b!important;
+  font-size:9px!important;
+  font-weight:850!important;
+}
+#checkoutModal .kw-co-section input,
+#checkoutModal .kw-co-section textarea,
+#checkoutModal .kw-co-section select,
+#checkoutModal .kw-location-trigger{
+  width:100%!important;
+  box-sizing:border-box!important;
+  border:1px solid #d1dfec!important;
+  border-radius:9px!important;
+  background:#fff!important;
+  color:#17345d!important;
+  font-size:10px!important;
+}
+#checkoutModal .kw-co-section input{height:43px!important;padding:0 11px!important}
+#checkoutModal .kw-co-section textarea{
+  height:68px!important;
+  min-height:68px!important;
+  padding:10px 11px!important;
+  resize:none!important;
+}
+#checkoutModal .kw-location-trigger{
+  height:44px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  text-align:left!important;
+  padding:0 11px!important;
+}
+#checkoutModal .kw-location-trigger b{color:#1769e8!important;font-size:18px!important}
+#checkoutModal .kw-address-attribution{font-size:8px!important;color:#7b8fa6!important}
+
+/* Shipping */
+#checkoutModal .checkout-summary-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  margin:0 0 9px!important;
+  padding:10px 12px!important;
+  border:1px solid #d8e6f3!important;
+  border-radius:9px!important;
+  background:#f5faff!important;
+  color:#58708e!important;
+  font-size:10px!important;
+}
+#checkoutModal .checkout-summary-row strong{color:#1769e8!important}
+#checkoutModal .checkout-shipping-options{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:8px!important;
+}
+#checkoutModal .checkout-shipping-empty{
+  grid-column:1/-1!important;
+  padding:12px!important;
+  text-align:center!important;
+  border:1px dashed #c9dbea!important;
+  border-radius:9px!important;
+  background:#fbfdff!important;
+  color:#8194aa!important;
+  font-size:8px!important;
+}
+
+/* Payment */
+#checkoutModal .mk-payment-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:8px!important;
+}
+#checkoutModal .mk-payment-option{
+  min-height:68px!important;
+  padding:10px!important;
+  border-radius:9px!important;
+}
+
+/* Voucher */
+#checkoutModal .kw-voucher{
+  display:grid!important;
+  grid-template-columns:1fr auto!important;
+  gap:8px!important;
+}
+#checkoutModal .kw-voucher input{height:43px!important;box-sizing:border-box!important}
+#checkoutModal .kw-voucher .smallbtn{
+  min-width:92px!important;
+  height:43px!important;
+  border:0!important;
+  border-radius:8px!important;
+  background:#1769e8!important;
+  color:#fff!important;
+}
+
+/* Right column summary */
+#checkoutModal .kw-co-items{
+  grid-area:summary!important;
+  grid-row:auto!important;
+  grid-column:auto!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:0!important;
+  align-self:start!important;
+  background:#fff!important;
+  border:1px solid #d8e6f3!important;
+  border-radius:14px!important;
+  overflow:hidden!important;
+  box-shadow:0 4px 16px rgba(28,76,120,.045)!important;
+}
+#checkoutModal .kw-co-items:before{
+  content:"🛒  Ringkasan Pesanan"!important;
+  display:block!important;
+  padding:18px 20px 14px!important;
+  color:#081f56!important;
+  font-size:18px!important;
+  font-weight:900!important;
+  border-bottom:1px solid #e6eef6!important;
+}
+#checkoutModal .kw-co-items:after{display:none!important}
+#checkoutModal .kw-co-items .checkout-summary-row{
+  margin:0!important;
+  border:0!important;
+  border-bottom:1px solid #edf2f7!important;
+  border-radius:0!important;
+  background:#fff!important;
+  padding:13px 20px!important;
+}
+
+/* Right trust + total */
+#checkoutModal .mk-checkout-trust{
+  grid-area:trust!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:14px 16px!important;
+  align-self:start!important;
+  background:#fff!important;
+  border:1px solid #d8e6f3!important;
+  border-radius:13px!important;
+  box-shadow:0 4px 16px rgba(28,76,120,.04)!important;
+}
+#checkoutModal .mk-trust-head{
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  padding:9px 10px!important;
+  border-radius:9px!important;
+  background:#f2f8ff!important;
+}
+#checkoutModal .mk-trust-head strong{font-size:13px!important;color:#092557!important}
+#checkoutModal .mk-trust-grid{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:11px 10px!important;
+  padding:11px 2px 2px!important;
+}
+#checkoutModal .mk-trust-grid>div{
+  display:flex!important;
+  gap:7px!important;
+  align-items:flex-start!important;
+}
+#checkoutModal .mk-trust-grid>div>b{
+  width:25px!important;height:25px!important;
+  display:grid!important;place-items:center!important;
+  flex:0 0 25px!important;border-radius:50%!important;
+  background:#edf6ff!important;color:#1769e8!important;
+}
+#checkoutModal .mk-trust-grid strong{display:block!important;color:#19355b!important;font-size:9px!important}
+#checkoutModal .mk-trust-grid small{display:block!important;margin-top:2px!important;color:#71859f!important;font-size:8px!important}
+
+#checkoutModal .kw-co-total{
+  grid-area:total!important;
+  grid-row:auto!important;
+  grid-column:auto!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:16px 20px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  align-self:start!important;
+  background:#eef7ff!important;
+  border:0!important;
+  border-radius:10px!important;
+}
+#checkoutModal .kw-co-total span{
+  color:#071f52!important;
+  font-size:17px!important;
+  font-weight:900!important;
+}
+#checkoutModal .kw-co-total strong{
+  color:#1769e8!important;
+  font-size:25px!important;
+  font-weight:900!important;
+}
+#checkoutModal .kw-co-pay{
+  grid-area:pay!important;
+  width:100%!important;
+  height:49px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:9px!important;
+  background:#1769e8!important;
+  color:#fff!important;
+  font-size:14px!important;
+  font-weight:900!important;
+}
+/* Put payment button beside total rather than letting old row rules move it */
+#checkoutModal .kw-co-pay{grid-column:2!important;grid-row:5!important;align-self:start!important}
+#checkoutModal .kw-co-total{grid-column:2!important;grid-row:4!important}
+#checkoutModal .mk-checkout-trust{grid-column:2!important;grid-row:3!important}
+#checkoutModal .kw-co-items{grid-column:2!important;grid-row:2 / span 1!important}
+
+/* The left content rows */
+#checkoutModal .kw-co-section:nth-of-type(2){grid-column:1!important;grid-row:2!important}
+#checkoutModal .kw-co-shipping{grid-column:1!important;grid-row:3!important}
+#checkoutModal .kw-co-payment{grid-column:1!important;grid-row:4!important}
+#checkoutModal .kw-co-voucher-final{grid-column:1!important;grid-row:5!important}
+
+/* Desktop reference has header visible and no dark modal overlay */
+@media(min-width:1001px){
+  #checkoutModal .kw-checkout-box{grid-template-areas:"head head" "address summary" "shipping trust" "payment total" "voucher pay"!important}
+}
+
+/* Tablet */
+@media(max-width:1000px){
+  #checkoutModal.kw-checkout-modal{inset:0!important;height:100dvh!important;background:#eef7ff!important}
+  #checkoutModal .kw-checkout-box{
+    width:min(900px,100vw)!important;
+    min-height:100%!important;
+    grid-template-columns:1fr!important;
+    grid-template-areas:"head" "summary" "address" "shipping" "payment" "voucher" "trust" "total" "pay"!important;
+    padding:0 18px 30px!important;
+  }
+  #checkoutModal .kw-co-head:after{display:none!important}
+  #checkoutModal .kw-co-items,#checkoutModal .kw-co-section,#checkoutModal .mk-checkout-trust,#checkoutModal .kw-co-total,#checkoutModal .kw-co-pay{
+    grid-column:1!important;
+    grid-row:auto!important;
+  }
+}
+
+/* Phone */
+@media(max-width:700px){
+  #checkoutModal .kw-checkout-box{
+    width:100vw!important;
+    padding:0 12px 24px!important;
+    gap:10px!important;
+    display:grid!important;
+  }
+  #checkoutModal .kw-co-head{min-height:82px!important;padding:12px 0!important}
+  #checkoutModal .kw-co-head h3{font-size:23px!important}
+  #checkoutModal .kw-co-head:after{display:none!important}
+  #checkoutModal .kw-co-title>b{width:34px!important;height:34px!important;flex-basis:34px!important}
+  #checkoutModal .checkout-shipping-options,#checkoutModal .mk-payment-grid{grid-template-columns:1fr!important}
+}
+</style>
+</body>
 </html>
