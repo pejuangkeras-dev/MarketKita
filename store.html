@@ -126,6 +126,18 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:poi
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="/marketkita-brand.css?v=20261003-brand">
+<style id="marketkita-p6-storefront">
+.p6-store-cover{background:linear-gradient(120deg,#dceaff,#f4f8ff 48%,#d7e9ff);height:128px;position:relative;overflow:hidden}
+.p6-store-cover:after{content:"";position:absolute;inset:auto -5% -90px auto;width:340px;height:180px;border-radius:50%;border:1px solid rgba(18,100,244,.12);box-shadow:0 0 0 28px rgba(18,100,244,.035),0 0 0 58px rgba(18,100,244,.025)}
+.p6-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 7px;border-radius:999px;background:#eaf3ff;color:#1264f4;font-size:7px;font-weight:900}
+.p6-store-rating{display:flex;align-items:center;gap:7px;margin-top:6px;font-size:9px;color:#71839a}.p6-store-rating strong{color:#102b57}.p6-stars{letter-spacing:1px;color:#f59e0b}
+.p6-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.p6-stat-card{padding:10px;border:1px solid #e2eaf3;border-radius:9px;background:#f9fbfe}.p6-stat-card strong{display:block;color:#102b57;font-size:13px}.p6-stat-card span{font-size:7px;color:#8796aa}
+.p6-filterbar{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.p6-filterbar button{height:30px;padding:0 11px;border:1px solid #d5e1ed;border-radius:8px;background:#fff;color:#61748d;font-size:8px;font-weight:850}.p6-filterbar button.active,.p6-filterbar button:hover{background:#edf5ff;border-color:#1264f4;color:#1264f4}
+.p6-empty{padding:42px 18px;text-align:center;grid-column:1/-1;border:1px dashed #d7e2ed;border-radius:12px;background:#fff;color:#7b8ba1;font-size:10px}
+.p6-about-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}.p6-about-card{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff}.p6-about-card h3{margin:0 0 9px;color:var(--navy);font-size:12px}.p6-about-card p{margin:0;color:#687b94;font-size:9px;line-height:1.7}
+.p6-share{display:flex;gap:6px}.p6-share button{height:32px;border:1px solid #d5e1ed;border-radius:8px;background:#fff;color:#1264f4;font-size:8px;font-weight:850;padding:0 10px}
+@media(max-width:700px){.p6-stat-grid{grid-template-columns:repeat(2,1fr)}.p6-about-grid{grid-template-columns:1fr}.p6-store-cover{height:100px}}
+</style>
 </head>
 <body>
 <header class="nav">
@@ -196,8 +208,9 @@ let products=[],store=null,activeTab="all";
 
 function filtered(){
   const q=(document.getElementById("storeSearch").value||"").trim().toLowerCase();
-  let list=products.filter(p=>!q||String(p.name||"").toLowerCase().includes(q));
-  if(activeTab==="new") list=[...list].reverse();
+  let list=products.filter(p=>!q||[p.name,p.category,p.brand,p.sku].filter(Boolean).join(" ").toLowerCase().includes(q));
+  if(activeTab==="popular") list.sort((a,b)=>(Number(b.review_count||b.reviewCount||0)-Number(a.review_count||a.reviewCount||0))||(Number(b.product_rating||b.productRating||0)-Number(a.product_rating||a.productRating||0)));
+  if(activeTab==="new") list.sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
   const sort=document.getElementById("sortProducts").value;
   if(sort==="price-low") list.sort((a,b)=>Number(a.price||0)-Number(b.price||0));
   if(sort==="price-high") list.sort((a,b)=>Number(b.price||0)-Number(a.price||0));
@@ -206,8 +219,8 @@ function filtered(){
 }
 function renderProducts(){
   const list=filtered(),root=document.getElementById("products");
-  document.getElementById("productCount").textContent=list.length+" produk";
-  root.innerHTML=list.length?list.map(p=>'<article class="card"><div class="photo"><img loading="lazy" src="'+esc(p.image_url||p.img||"")+'" alt="'+esc(p.name)+'"></div><div class="body"><h3>'+esc(p.name)+'</h3><div class="price">'+rupiah(p.price)+'</div><div class="product-sub">Produk dari '+esc(store?.name||"toko ini")+'</div><button class="btn" onclick="goProduct(\''+encodeURIComponent(p.id||"")+'\')">Lihat Produk</button></div></article>').join(""):'<div class="empty">Produk yang dicari belum tersedia di toko ini.</div>';
+  document.getElementById("productCount").textContent=list.length+" dari "+products.length+" produk";
+  root.innerHTML=list.length?list.map(p=>'<article class="card"><div class="photo"><img loading="lazy" src="'+esc(p.image_url||p.img||"")+'" alt="'+esc(p.name)+'"></div><div class="body"><h3>'+esc(p.name)+'</h3><div class="price">'+rupiah(p.price)+'</div><div class="product-sub">★ '+(Number(p.product_rating||p.productRating||0)?Number(p.product_rating||p.productRating).toFixed(1):"—")+' · '+Number(p.review_count||p.reviewCount||0)+' ulasan</div><button class="btn" onclick="goProduct(\''+encodeURIComponent(p.id||"")+'\')">Lihat Produk</button></div></article>').join(""):'<div class="p6-empty">Produk yang sesuai pencarian/filter belum tersedia di toko ini.</div>';
 }
 function renderStore(){
   const profile=document.getElementById("storeProfile");
@@ -217,21 +230,24 @@ function renderStore(){
   document.getElementById("crumbName").textContent=name;
   document.getElementById("sideCount").textContent=products.length;
   document.getElementById("aboutText").textContent=store.description||"Selamat datang di toko MarketKita.";
-  profile.innerHTML='<div class="avatar">'+esc(initial)+'</div><div class="store-copy"><div class="eyebrow">Official Seller Store</div><h1 class="store-name">'+esc(name)+'</h1><p class="store-desc">'+esc(store.description||"Selamat datang di toko MarketKita.")+'</p><div class="store-meta">@'+esc(store.slug||slug)+'</div></div><div class="store-actions"><button class="store-btn" id="followBtn" type="button">♡ Ikuti Toko</button><a class="store-btn primary" href="/#produk">Belanja Produk</a></div><div class="store-stats"><div class="stat"><strong>'+products.length+'</strong>Produk</div><div class="stat"><strong>MarketKita</strong>Marketplace</div></div>';
+  const rating=products.length?products.reduce((sum,p)=>sum+Number(p.product_rating||p.productRating||0),0)/Math.max(1,products.filter(p=>Number(p.product_rating||p.productRating||0)>0).length):0;
+  const reviews=products.reduce((sum,p)=>sum+Number(p.review_count||p.reviewCount||0),0);
+  const followersKey="marketkita_followed_stores";
+  let followed=[];try{followed=JSON.parse(localStorage.getItem(followersKey)||"[]");if(!Array.isArray(followed))followed=[];}catch(e){followed=[];}
+  const isFollowed=followed.includes(String(store.slug||slug));
+  profile.innerHTML='<div class="avatar">'+esc(initial)+'</div><div class="store-copy"><div class="eyebrow">Official Seller Store</div><div class="p6-badge">✓ Toko aktif di MarketKita</div><h1 class="store-name">'+esc(name)+'</h1><p class="store-desc">'+esc(store.description||"Selamat datang di toko MarketKita.")+'</p><div class="store-meta">@'+esc(store.slug||slug)+'</div><div class="p6-store-rating"><span class="p6-stars">★★★★★</span><strong>'+ (rating?rating.toFixed(1):"—") +'</strong><span>'+reviews+' ulasan produk</span></div></div><div class="store-actions"><button class="store-btn '+(isFollowed?"primary":"")+'" id="followBtn" type="button">'+(isFollowed?"✓ Mengikuti":"♡ Ikuti Toko")+'</button><button class="store-btn" id="shareStoreBtn" type="button">↗ Bagikan</button><a class="store-btn primary" href="/#produk">Belanja Produk</a></div><div class="store-stats"><div class="stat"><strong>'+products.length+'</strong>Produk</div><div class="stat"><strong>'+ (rating?rating.toFixed(1):"—") +'</strong>Rating</div><div class="stat"><strong>'+reviews+'</strong>Ulasan</div><div class="stat"><strong>Aktif</strong>Status</div></div>';
   const follow=document.getElementById("followBtn");
-  follow.onclick=()=>{follow.classList.toggle("primary");follow.textContent=follow.classList.contains("primary")?"✓ Mengikuti":"♡ Ikuti Toko"};
+  follow.onclick=()=>{const key=String(store.slug||slug);followed=followed.includes(key)?followed.filter(x=>x!==key):[...followed,key];localStorage.setItem(followersKey,JSON.stringify(followed));const yes=followed.includes(key);follow.classList.toggle("primary",yes);follow.textContent=yes?"✓ Mengikuti":"♡ Ikuti Toko";};
+  document.getElementById("shareStoreBtn").onclick=async()=>{try{await navigator.clipboard.writeText(location.href);alert("Link toko berhasil disalin.");}catch(e){window.prompt("Salin link toko:",location.href);}};
   renderProducts();
 }
-function goProduct(id){location.href="/?store="+encodeURIComponent(slug)+"&from_store=1#produk";}
+function goProduct(id){const p=products.find(x=>String(x.id||"")===decodeURIComponent(String(id||"")));if(window.parent&&window.parent!==window){} location.href="/?product="+encodeURIComponent(p?.id||id)+"&store="+encodeURIComponent(slug)+"&from_store=1#produk";}
 document.getElementById("storeSearch").addEventListener("input",renderProducts);
 document.getElementById("sortProducts").addEventListener("change",renderProducts);
 document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-  btn.classList.add("active");activeTab=btn.dataset.tab;
-  const about=activeTab==="about";
-  document.getElementById("productSection").style.display=about?"none":"block";
-  document.getElementById("aboutSection").style.display=about?"block":"none";
-  if(!about)renderProducts();
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));btn.classList.add("active");activeTab=btn.dataset.tab;
+  const about=activeTab==="about";document.getElementById("productSection").style.display=about?"none":"block";document.getElementById("aboutSection").style.display=about?"block":"none";
+  if(about){document.getElementById("aboutText").innerHTML='<div class="p6-about-grid"><div class="p6-about-card"><h3>'+esc(store?.name||"Toko MarketKita")+'</h3><p>'+esc(store?.description||"Toko ini berjualan di MarketKita.")+'</p></div><div class="p6-about-card"><h3>Ringkasan Toko</h3><p>'+products.length+' produk aktif<br>Rating '+(products.length?((products.reduce((s,p)=>s+Number(p.product_rating||p.productRating||0),0)/Math.max(1,products.filter(p=>Number(p.product_rating||p.productRating||0)>0).length)).toFixed(1)):"—")+'<br>Ulasan produk '+products.reduce((s,p)=>s+Number(p.review_count||p.reviewCount||0),0)+'</p></div></div>';}else renderProducts();
 }));
 async function init(){
   try{
