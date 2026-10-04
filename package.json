@@ -42,7 +42,8 @@
     "test:g8": "npx --yes playwright test tests/g8-order-timeline.spec.mjs",
     "test:g9": "npx --yes playwright test tests/g9-operations.spec.mjs",
     "test:g10": "npx --yes playwright test tests/g10-marketplace-bi.spec.mjs",
-    "test:core": "npx --yes playwright test tests/marketplace-core.spec.mjs"
+    "test:core": "npx --yes playwright test tests/marketplace-core.spec.mjs",
+    "test:p16": "npx --yes playwright test tests/p16-core-stability.spec.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0"
