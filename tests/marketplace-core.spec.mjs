@@ -29,7 +29,7 @@ test.describe("MarketKita Core Production Smoke", () => {
     const config = await request.get(BASE_URL + "/api/public-config");
     expect(config.ok()).toBeTruthy();
     const configBody = await config.json();
-    expect(configBody.supabaseUrl).toMatch(/^https?:\\/\\//);
+    expect(configBody.supabaseUrl).toMatch(/^https?:\/\//);
     expect(configBody.supabaseAnonKey).toBeTruthy();
     expect(configBody.clientKey).toBeTruthy();
     expect(configBody.snapUrl).toMatch(/^https?:\\/\\//);
