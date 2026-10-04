@@ -10730,12 +10730,15 @@ body.mk-cart-open{overflow:hidden!important}
     const value=String(category||"").trim();
     const cat=document.getElementById("marketplaceCategory");
     const input=document.getElementById("marketplaceSearch");
+    const exact=optionExists(cat,value);
     if(cat){
-      const option=[...cat.options].find(o=>String(o.value).toLowerCase()===value.toLowerCase());
-      cat.value=option?option.value:"";
+      cat.value=exact?value:"";
       cat.dispatchEvent(new Event("change",{bubbles:true}));
     }
-    if(input&&(!optionExists(cat,value))) input.value="";
+    if(input){
+      input.value=exact?"":value;
+      input.dispatchEvent(new Event("input",{bubbles:true}));
+    }
     document.getElementById("produk")?.scrollIntoView({behavior:"smooth",block:"start"});
   };
   function optionExists(select,value){
