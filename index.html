@@ -4996,7 +4996,135 @@ body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
  #authOverlay.account-expanded .account-profile-head{display:block!important}
  #authOverlay.account-expanded .account-safe-badge{margin-top:12px!important}
 }
-</style></head>
+</style><style id="marketkita-checkout-reference-final">
+/* Checkout visual matched to supplied MarketKita reference while preserving existing checkout IDs/functions */
+#checkoutModal.kw-checkout-modal{
+  padding:0!important;align-items:stretch!important;justify-content:stretch!important;
+  background:#edf7ff!important;overflow:auto!important;
+}
+#checkoutModal .kw-checkout-box{
+  width:100%!important;max-width:none!important;max-height:none!important;min-height:100vh!important;
+  overflow:visible!important;border:0!important;border-radius:0!important;background:#edf7ff!important;
+  box-shadow:none!important;padding:0 38px 42px!important;color:#122954!important;
+  display:grid!important;grid-template-columns:minmax(0,1.7fr) minmax(360px,.85fr)!important;
+  grid-template-rows:auto auto auto auto auto auto!important;gap:0 18px!important;
+}
+#checkoutModal .kw-co-head{
+  grid-column:1/-1!important;position:relative!important;top:auto!important;
+  border:0!important;background:transparent!important;padding:26px 2px 20px!important;
+  min-height:94px!important;align-items:center!important;
+}
+#checkoutModal .kw-co-head>div{display:flex!important;align-items:flex-start!important;gap:12px!important}
+#checkoutModal .kw-co-head>div:before{
+  content:"🔒";display:grid;place-items:center;width:48px;height:48px;border-radius:50%;
+  background:#fff;color:#1769e8;font-size:22px;flex:none;
+}
+#checkoutModal .kw-co-head>div>span{display:none!important}
+#checkoutModal .kw-co-head h3{font-size:31px!important;letter-spacing:-.04em!important;margin:0 0 3px!important;color:#081f56!important}
+#checkoutModal .kw-co-head p{font-size:13px!important;color:#607898!important}
+#checkoutModal .kw-co-head:after{
+  content:"1  Alamat      2  Pengiriman      3  Pembayaran      4  Selesai";
+  position:absolute;right:48px;top:39px;color:#102856;font-weight:800;font-size:12px;word-spacing:13px;
+  padding-left:10px;
+}
+#checkoutModal .kw-co-head .close-btn{
+  position:absolute!important;right:0!important;top:28px!important;z-index:5!important;
+  width:34px!important;height:34px!important;border-radius:50%!important;
+}
+#checkoutModal .kw-co-items{
+  grid-column:2!important;grid-row:2 / span 4!important;align-self:start!important;
+  margin:0!important;background:#fff!important;border:1px solid #dce9f6!important;
+  border-radius:16px!important;padding:18px!important;box-shadow:0 6px 20px rgba(34,83,130,.05)!important;
+  min-height:210px!important;
+}
+#checkoutModal .kw-co-section{
+  grid-column:1!important;background:#fff!important;border:1px solid #dce9f6!important;
+  border-radius:15px!important;padding:18px 20px!important;margin-bottom:13px!important;
+  border-top:1px solid #dce9f6!important;box-shadow:0 5px 18px rgba(34,83,130,.04)!important;
+}
+#checkoutModal .kw-co-recipient{grid-row:2!important}
+#checkoutModal .kw-co-recipient .kw-co-grid{grid-template-columns:1fr 1fr!important}
+#checkoutModal .kw-co-recipient .kw-co-full{grid-column:1/-1!important}
+#checkoutModal .kw-co-title{margin-bottom:13px!important}
+#checkoutModal .kw-co-title>b{
+  width:38px!important;height:38px!important;background:#1769e8!important;font-size:16px!important;
+  flex:none!important;box-shadow:0 4px 10px rgba(23,105,232,.18)!important;
+}
+#checkoutModal .kw-co-title strong{font-size:16px!important;color:#0b2457!important}
+#checkoutModal .kw-co-title small{font-size:10px!important;color:#657d9a!important}
+#checkoutModal .kw-co-section label{font-size:10px!important;color:#18325d!important}
+#checkoutModal .kw-co-section input,#checkoutModal .kw-co-section textarea,#checkoutModal .kw-co-section select{
+  height:43px!important;border:1px solid #d5e2ef!important;border-radius:9px!important;color:#203b64!important;background:#fff!important;
+}
+#checkoutModal .kw-co-section textarea{height:66px!important}
+#checkoutModal .kw-location-trigger{
+  min-height:48px!important;border-color:#cfe0f1!important;border-radius:10px!important;
+}
+#checkoutModal .kw-co-section:nth-of-type(2){grid-row:3!important}
+#checkoutModal .kw-co-shipping{grid-row:4!important}
+#checkoutModal .kw-co-payment{grid-row:5!important}
+#checkoutModal .kw-co-voucher-final{grid-row:6!important}
+#checkoutModal .mk-payment-grid{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:9px!important;
+}
+#checkoutModal .mk-payment-option{
+  min-height:74px!important;border:1px solid #d5e2ef!important;border-radius:10px!important;
+  background:#fff!important;padding:10px!important;display:grid!important;
+  grid-template-columns:34px 1fr 16px!important;gap:8px!important;align-items:center!important;
+  text-align:left!important;color:#122954!important;cursor:pointer!important;
+}
+#checkoutModal .mk-payment-option.active{border-color:#1769e8!important;box-shadow:inset 0 0 0 1px #1769e8!important;background:#f5faff!important}
+#checkoutModal .mk-pay-icon{width:32px!important;height:32px!important;border-radius:9px!important;background:#eaf4ff!important;color:#1769e8!important;display:grid!important;place-items:center!important;font-weight:900!important}
+#checkoutModal .mk-payment-option strong{display:block!important;font-size:10px!important}
+#checkoutModal .mk-payment-option small{display:block!important;color:#7288a2!important;font-size:8px!important;margin-top:3px!important}
+#checkoutModal .mk-payment-option i{font-style:normal!important;color:#1769e8!important;font-size:15px!important}
+#checkoutModal .kw-co-voucher-final{padding-bottom:16px!important}
+#checkoutModal .kw-co-total{
+  grid-column:2!important;grid-row:6!important;align-self:end!important;
+  background:#fff!important;border:1px solid #dce9f6!important;border-radius:13px!important;
+  padding:17px 18px!important;margin:0 0 9px!important;border-top:1px solid #dce9f6!important;
+}
+#checkoutModal .kw-co-total span{font-size:13px!important;font-weight:800!important;color:#18335f!important}
+#checkoutModal .kw-co-total strong{font-size:23px!important;color:#1769e8!important}
+#checkoutModal .kw-co-pay{
+  grid-column:2!important;grid-row:7!important;width:100%!important;height:48px!important;margin:0 0 18px!important;
+  border-radius:10px!important;background:#1769e8!important;color:#fff!important;font-size:14px!important;font-weight:800!important;
+}
+#checkoutModal .kw-co-pay:before{content:"🔒  ";font-size:12px}
+#checkoutModal .checkout-summary-row{
+  background:#f5faff!important;border:1px solid #dceaf7!important;border-radius:9px!important;padding:10px 12px!important;
+}
+#checkoutModal .checkout-shipping-options{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important}
+#checkoutModal .checkout-shipping-option{
+  border:1px solid #d5e2ef!important;border-radius:10px!important;background:#fff!important;
+}
+#checkoutModal .kw-voucher{gap:8px!important}
+#checkoutModal .kw-voucher button{background:#1769e8!important;color:#fff!important;border-radius:8px!important}
+@media(max-width:1000px){
+ #checkoutModal .kw-checkout-box{grid-template-columns:1fr!important;padding:0 18px 30px!important}
+ #checkoutModal .kw-co-items,#checkoutModal .kw-co-total,#checkoutModal .kw-co-pay{grid-column:1!important}
+ #checkoutModal .kw-co-items{grid-row:3!important}
+ #checkoutModal .kw-co-recipient{grid-row:2!important}
+ #checkoutModal .kw-co-total{grid-row:auto!important}
+ #checkoutModal .kw-co-pay{grid-row:auto!important}
+ #checkoutModal .kw-co-head:after{display:none!important}
+ #checkoutModal .kw-co-head{padding-right:45px!important}
+}
+@media(max-width:700px){
+ #checkoutModal .kw-checkout-box{padding:0 10px 25px!important}
+ #checkoutModal .kw-co-head h3{font-size:25px!important}
+ #checkoutModal .kw-co-recipient .kw-co-grid,.mk-payment-grid{grid-template-columns:1fr!important}
+ #checkoutModal .checkout-shipping-options{grid-template-columns:1fr 1fr!important}
+ #checkoutModal .kw-co-section{padding:15px!important}
+}
+</style>
+<script id="marketkita-checkout-payment-ui-final">
+window.selectCheckoutPayment=function(btn){
+ document.querySelectorAll("#checkoutModal .mk-payment-option").forEach(x=>{x.classList.remove("active");const i=x.querySelector("i");if(i)i.textContent="○";});
+ btn.classList.add("active");const i=btn.querySelector("i");if(i)i.textContent="●";
+ window.checkoutPaymentMethod=btn.dataset.payment||"bank";
+};
+</script></head>
 
 <body>
 <div class="mk2-top"><div class="container"><span>🚚 Gratis ongkir minimal pembelian Rp 200.000</span><span>Diskon 10% untuk pembelian pertama</span><span>Aman • Cepat • Terpercaya</span></div></div>
@@ -5271,11 +5399,21 @@ body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
       <div id="checkoutShippingOptions" class="checkout-shipping-options"><div class="checkout-shipping-empty">Pilih alamat untuk menghitung ongkir.</div></div>
     </section>
 
-    <section class="kw-co-section">
-      <div class="kw-co-title"><b>4</b><div><strong>Voucher</strong><small>Gunakan voucher yang sudah Anda klaim.</small></div></div>
-      <div class="kw-voucher"><input id="checkoutVoucher" placeholder="Masukkan kode voucher"><button type="button" class="smallbtn" onclick="validateCheckoutVoucher()">Terapkan</button></div>
-      <div id="checkoutVoucherMessage" class="kw-voucher-msg"></div><div id="checkoutPromotionSummary" class="mk-g4-promo"></div>
-    </section>
+    <section class="kw-co-section kw-co-payment">
+  <div class="kw-co-title"><b>4</b><div><strong>Metode Pembayaran</strong><small>Pilih metode pembayaran yang Anda inginkan.</small></div></div>
+  <div class="mk-payment-grid">
+    <button type="button" class="mk-payment-option active" data-payment="bank" onclick="selectCheckoutPayment(this)"><span class="mk-pay-icon">▣</span><span><strong>Transfer Bank</strong><small>BCA, BNI, BRI, Mandiri, dll</small></span><i>●</i></button>
+    <button type="button" class="mk-payment-option" data-payment="ewallet" onclick="selectCheckoutPayment(this)"><span class="mk-pay-icon">◉</span><span><strong>E-Wallet</strong><small>OVO, DANA, GoPay</small></span><i>○</i></button>
+    <button type="button" class="mk-payment-option" data-payment="va" onclick="selectCheckoutPayment(this)"><span class="mk-pay-icon">▤</span><span><strong>Virtual Account</strong><small>BCA, BNI, BRI, Mandiri</small></span><i>○</i></button>
+    <button type="button" class="mk-payment-option" data-payment="card" onclick="selectCheckoutPayment(this)"><span class="mk-pay-icon">▰</span><span><strong>Kartu Kredit/Debit</strong><small>Visa, Mastercard, JCB</small></span><i>○</i></button>
+  </div>
+</section>
+
+<section class="kw-co-section kw-co-voucher-final">
+  <div class="kw-co-title"><b>5</b><div><strong>Voucher</strong><small>Gunakan voucher yang sudah Anda klaim.</small></div></div>
+  <div class="kw-voucher"><input id="checkoutVoucher" placeholder="Masukkan kode voucher"><button type="button" class="smallbtn" onclick="validateCheckoutVoucher()">Terapkan</button></div>
+  <div id="checkoutVoucherMessage" class="kw-voucher-msg"></div><div id="checkoutPromotionSummary" class="mk-g4-promo"></div>
+</section>
 
     <div class="kw-co-total"><span>Total pembayaran</span><strong id="checkoutTotal">Rp0</strong></div>
     <button id="payButton" class="pay-btn kw-co-pay" type="button" onclick="startPayment(event)" data-i18n="pay_button">Lanjut ke Pembayaran</button>
