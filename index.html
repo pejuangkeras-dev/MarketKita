@@ -9699,6 +9699,8 @@ document.addEventListener("DOMContentLoaded",async()=>{
   await loadMarketplaceStats();
   render();
   renderRecommendations();
+  const productParam=urlParams.get("product");
+  if(productParam){const idx=products.findIndex(p=>String(p.id||"")===String(productParam));if(idx>=0)setTimeout(()=>openProductDetail(idx),0);}
 });
 </script>
 <style>
