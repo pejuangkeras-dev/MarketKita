@@ -11308,5 +11308,44 @@ body.mk-cart-open{overflow:hidden!important}
     max-width:100vw!important;
   }
 }
-</style></body>
+</style><style id="marketkita-checkout-structural-final-20261004">
+#checkoutModal .kw-checkout-box{
+  display:grid!important;
+  grid-template-columns:minmax(0,2fr) minmax(350px,.92fr)!important;
+  grid-template-rows:auto auto auto auto auto!important;
+  column-gap:18px!important;
+  row-gap:12px!important;
+  align-content:start!important;
+  align-items:start!important;
+}
+#checkoutModal .kw-co-head{grid-column:1/-1!important;grid-row:1!important}
+#checkoutModal .kw-co-recipient{display:none!important;grid-column:auto!important;grid-row:auto!important}
+#checkoutModal .kw-co-section:nth-of-type(2){grid-column:1!important;grid-row:2!important}
+#checkoutModal .kw-co-shipping{grid-column:1!important;grid-row:3!important}
+#checkoutModal .kw-co-payment{grid-column:1!important;grid-row:4!important}
+#checkoutModal .kw-co-voucher-final{grid-column:1!important;grid-row:5!important}
+#checkoutModal .kw-co-items{grid-column:2!important;grid-row:2!important}
+#checkoutModal .mk-checkout-trust{grid-column:2!important;grid-row:3!important}
+#checkoutModal .kw-co-total{grid-column:2!important;grid-row:4!important}
+#checkoutModal .kw-co-pay{grid-column:2!important;grid-row:5!important}
+@media(max-width:1000px){
+  #checkoutModal .kw-checkout-box{grid-template-columns:minmax(0,1.6fr) minmax(300px,.8fr)!important}
+}
+@media(max-width:700px){
+  #checkoutModal .kw-checkout-box{
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto auto auto auto auto auto auto auto auto!important;
+  }
+  #checkoutModal .kw-co-head{grid-column:1!important;grid-row:1!important}
+  #checkoutModal .kw-co-section:nth-of-type(2){grid-column:1!important;grid-row:2!important}
+  #checkoutModal .kw-co-items{grid-column:1!important;grid-row:3!important}
+  #checkoutModal .kw-co-shipping{grid-column:1!important;grid-row:4!important}
+  #checkoutModal .kw-co-payment{grid-column:1!important;grid-row:5!important}
+  #checkoutModal .kw-co-voucher-final{grid-column:1!important;grid-row:6!important}
+  #checkoutModal .mk-checkout-trust{grid-column:1!important;grid-row:7!important}
+  #checkoutModal .kw-co-total{grid-column:1!important;grid-row:8!important}
+  #checkoutModal .kw-co-pay{grid-column:1!important;grid-row:9!important}
+}
+</style>
+</body>
 </html>
