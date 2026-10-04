@@ -4996,127 +4996,6 @@ body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
  #authOverlay.account-expanded .account-profile-head{display:block!important}
  #authOverlay.account-expanded .account-safe-badge{margin-top:12px!important}
 }
-</style><style id="marketkita-checkout-reference-final">
-/* Checkout visual matched to supplied MarketKita reference while preserving existing checkout IDs/functions */
-#checkoutModal.kw-checkout-modal{
-  padding:0!important;align-items:stretch!important;justify-content:stretch!important;
-  background:#edf7ff!important;overflow:auto!important;
-}
-#checkoutModal .kw-checkout-box{
-  width:100%!important;max-width:none!important;max-height:none!important;min-height:100vh!important;
-  overflow:visible!important;border:0!important;border-radius:0!important;background:#edf7ff!important;
-  box-shadow:none!important;padding:0 38px 42px!important;color:#122954!important;
-  display:grid!important;grid-template-columns:minmax(0,1.7fr) minmax(360px,.85fr)!important;
-  grid-template-rows:auto auto auto auto auto auto!important;gap:0 18px!important;
-}
-#checkoutModal .kw-co-head{
-  grid-column:1/-1!important;position:relative!important;top:auto!important;
-  border:0!important;background:transparent!important;padding:26px 2px 20px!important;
-  min-height:94px!important;align-items:center!important;
-}
-#checkoutModal .kw-co-head>div{display:flex!important;align-items:flex-start!important;gap:12px!important}
-#checkoutModal .kw-co-head>div:before{
-  content:"🔒";display:grid;place-items:center;width:48px;height:48px;border-radius:50%;
-  background:#fff;color:#1769e8;font-size:22px;flex:none;
-}
-#checkoutModal .kw-co-head>div>span{display:none!important}
-#checkoutModal .kw-co-head h3{font-size:31px!important;letter-spacing:-.04em!important;margin:0 0 3px!important;color:#081f56!important}
-#checkoutModal .kw-co-head p{font-size:13px!important;color:#607898!important}
-#checkoutModal .kw-co-head:after{
-  content:"1  Alamat      2  Pengiriman      3  Pembayaran      4  Selesai";
-  position:absolute;right:48px;top:39px;color:#102856;font-weight:800;font-size:12px;word-spacing:13px;
-  padding-left:10px;
-}
-#checkoutModal .kw-co-head .close-btn{
-  position:absolute!important;right:0!important;top:28px!important;z-index:5!important;
-  width:34px!important;height:34px!important;border-radius:50%!important;
-}
-#checkoutModal .kw-co-items{
-  grid-column:2!important;grid-row:2 / span 4!important;align-self:start!important;
-  margin:0!important;background:#fff!important;border:1px solid #dce9f6!important;
-  border-radius:16px!important;padding:18px!important;box-shadow:0 6px 20px rgba(34,83,130,.05)!important;
-  min-height:210px!important;
-}
-#checkoutModal .kw-co-section{
-  grid-column:1!important;background:#fff!important;border:1px solid #dce9f6!important;
-  border-radius:15px!important;padding:18px 20px!important;margin-bottom:13px!important;
-  border-top:1px solid #dce9f6!important;box-shadow:0 5px 18px rgba(34,83,130,.04)!important;
-}
-#checkoutModal .kw-co-recipient{grid-row:2!important}
-#checkoutModal .kw-co-recipient .kw-co-grid{grid-template-columns:1fr 1fr!important}
-#checkoutModal .kw-co-recipient .kw-co-full{grid-column:1/-1!important}
-#checkoutModal .kw-co-title{margin-bottom:13px!important}
-#checkoutModal .kw-co-title>b{
-  width:38px!important;height:38px!important;background:#1769e8!important;font-size:16px!important;
-  flex:none!important;box-shadow:0 4px 10px rgba(23,105,232,.18)!important;
-}
-#checkoutModal .kw-co-title strong{font-size:16px!important;color:#0b2457!important}
-#checkoutModal .kw-co-title small{font-size:10px!important;color:#657d9a!important}
-#checkoutModal .kw-co-section label{font-size:10px!important;color:#18325d!important}
-#checkoutModal .kw-co-section input,#checkoutModal .kw-co-section textarea,#checkoutModal .kw-co-section select{
-  height:43px!important;border:1px solid #d5e2ef!important;border-radius:9px!important;color:#203b64!important;background:#fff!important;
-}
-#checkoutModal .kw-co-section textarea{height:66px!important}
-#checkoutModal .kw-location-trigger{
-  min-height:48px!important;border-color:#cfe0f1!important;border-radius:10px!important;
-}
-#checkoutModal .kw-co-section:nth-of-type(2){grid-row:3!important}
-#checkoutModal .kw-co-shipping{grid-row:4!important}
-#checkoutModal .kw-co-payment{grid-row:5!important}
-#checkoutModal .kw-co-voucher-final{grid-row:6!important}
-#checkoutModal .mk-payment-grid{
-  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:9px!important;
-}
-#checkoutModal .mk-payment-option{
-  min-height:74px!important;border:1px solid #d5e2ef!important;border-radius:10px!important;
-  background:#fff!important;padding:10px!important;display:grid!important;
-  grid-template-columns:34px 1fr 16px!important;gap:8px!important;align-items:center!important;
-  text-align:left!important;color:#122954!important;cursor:pointer!important;
-}
-#checkoutModal .mk-payment-option.active{border-color:#1769e8!important;box-shadow:inset 0 0 0 1px #1769e8!important;background:#f5faff!important}
-#checkoutModal .mk-pay-icon{width:32px!important;height:32px!important;border-radius:9px!important;background:#eaf4ff!important;color:#1769e8!important;display:grid!important;place-items:center!important;font-weight:900!important}
-#checkoutModal .mk-payment-option strong{display:block!important;font-size:10px!important}
-#checkoutModal .mk-payment-option small{display:block!important;color:#7288a2!important;font-size:8px!important;margin-top:3px!important}
-#checkoutModal .mk-payment-option i{font-style:normal!important;color:#1769e8!important;font-size:15px!important}
-#checkoutModal .kw-co-voucher-final{padding-bottom:16px!important}
-#checkoutModal .kw-co-total{
-  grid-column:2!important;grid-row:6!important;align-self:end!important;
-  background:#fff!important;border:1px solid #dce9f6!important;border-radius:13px!important;
-  padding:17px 18px!important;margin:0 0 9px!important;border-top:1px solid #dce9f6!important;
-}
-#checkoutModal .kw-co-total span{font-size:13px!important;font-weight:800!important;color:#18335f!important}
-#checkoutModal .kw-co-total strong{font-size:23px!important;color:#1769e8!important}
-#checkoutModal .kw-co-pay{
-  grid-column:2!important;grid-row:7!important;width:100%!important;height:48px!important;margin:0 0 18px!important;
-  border-radius:10px!important;background:#1769e8!important;color:#fff!important;font-size:14px!important;font-weight:800!important;
-}
-#checkoutModal .kw-co-pay:before{content:"🔒  ";font-size:12px}
-#checkoutModal .checkout-summary-row{
-  background:#f5faff!important;border:1px solid #dceaf7!important;border-radius:9px!important;padding:10px 12px!important;
-}
-#checkoutModal .checkout-shipping-options{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important}
-#checkoutModal .checkout-shipping-option{
-  border:1px solid #d5e2ef!important;border-radius:10px!important;background:#fff!important;
-}
-#checkoutModal .kw-voucher{gap:8px!important}
-#checkoutModal .kw-voucher button{background:#1769e8!important;color:#fff!important;border-radius:8px!important}
-@media(max-width:1000px){
- #checkoutModal .kw-checkout-box{grid-template-columns:1fr!important;padding:0 18px 30px!important}
- #checkoutModal .kw-co-items,#checkoutModal .kw-co-total,#checkoutModal .kw-co-pay{grid-column:1!important}
- #checkoutModal .kw-co-items{grid-row:3!important}
- #checkoutModal .kw-co-recipient{grid-row:2!important}
- #checkoutModal .kw-co-total{grid-row:auto!important}
- #checkoutModal .kw-co-pay{grid-row:auto!important}
- #checkoutModal .kw-co-head:after{display:none!important}
- #checkoutModal .kw-co-head{padding-right:45px!important}
-}
-@media(max-width:700px){
- #checkoutModal .kw-checkout-box{padding:0 10px 25px!important}
- #checkoutModal .kw-co-head h3{font-size:25px!important}
- #checkoutModal .kw-co-recipient .kw-co-grid,.mk-payment-grid{grid-template-columns:1fr!important}
- #checkoutModal .checkout-shipping-options{grid-template-columns:1fr 1fr!important}
- #checkoutModal .kw-co-section{padding:15px!important}
-}
 </style>
 <script id="marketkita-checkout-payment-ui-final">
 window.selectCheckoutPayment=function(btn){
@@ -5498,7 +5377,164 @@ html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!impo
   #checkoutModal .kw-co-grid,#checkoutModal .checkout-shipping-options,#checkoutModal .mk-payment-grid,#checkoutModal .mk-trust-grid{grid-template-columns:1fr!important}
 }
 </style>
-</head>
+<style id="marketkita-checkout-final-v4">
+/* MarketKita checkout: one authoritative layout. Keep the real marketplace header visible. */
+html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!important}
+#checkoutModal.kw-checkout-modal{
+  position:fixed!important;top:112px!important;right:0!important;bottom:0!important;left:0!important;
+  width:100vw!important;height:calc(100dvh - 112px)!important;
+  z-index:30!important;display:none!important;padding:0!important;margin:0!important;
+  background:#eef6fd!important;backdrop-filter:none!important;overflow:hidden!important;
+}
+#checkoutModal.kw-checkout-modal.show{display:block!important}
+#checkoutModal.kw-checkout-modal>.kw-checkout-box{
+  position:relative!important;width:100%!important;height:100%!important;min-height:0!important;
+  max-width:none!important;max-height:none!important;margin:0!important;padding:20px 40px 34px!important;
+  box-sizing:border-box!important;overflow-y:auto!important;overflow-x:hidden!important;
+  border:0!important;border-radius:0!important;background:#eef6fd!important;box-shadow:none!important;
+  display:grid!important;grid-template-columns:minmax(0,1fr) 420px!important;
+  grid-template-rows:max-content 1fr!important;grid-template-areas:"head head" "main aside"!important;
+  column-gap:18px!important;row-gap:14px!important;align-content:start!important;
+}
+#checkoutModal .kw-co-head{
+  grid-area:head!important;position:relative!important;min-height:74px!important;
+  margin:0!important;padding:0 46px 13px 4px!important;box-sizing:border-box!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  background:transparent!important;border:0!important;border-bottom:1px solid #d6e4f1!important;
+  box-shadow:none!important;
+}
+#checkoutModal .kw-co-head>div{display:flex!important;align-items:center!important;gap:12px!important}
+#checkoutModal .kw-co-head>div:before{
+  content:"🔒"!important;width:42px!important;height:42px!important;flex:0 0 42px!important;
+  display:grid!important;place-items:center!important;border-radius:50%!important;
+  background:#fff!important;box-shadow:0 3px 10px rgba(25,88,145,.08)!important;
+}
+#checkoutModal .kw-co-head>div>span{display:block!important;color:#1769e8!important;font-size:8px!important;font-weight:900!important;letter-spacing:.12em!important}
+#checkoutModal .kw-co-head h3{margin:2px 0 3px!important;font-size:28px!important;line-height:1.05!important;color:#071e51!important;letter-spacing:-.04em!important}
+#checkoutModal .kw-co-head p{margin:0!important;font-size:11px!important;color:#647b98!important}
+#checkoutModal .kw-co-head:after{
+  content:"1  Alamat      →      2  Pengiriman      →      3  Pembayaran      →      4  Selesai"!important;
+  margin-left:auto!important;padding:9px 14px!important;border-radius:9px!important;
+  background:#fff!important;color:#1a3158!important;font-size:10px!important;font-weight:800!important;
+  white-space:pre!important;box-shadow:0 3px 10px rgba(25,88,145,.05)!important;
+}
+#checkoutModal .kw-co-head .close-btn{
+  position:absolute!important;right:0!important;top:0!important;width:32px!important;height:32px!important;
+  border-radius:50%!important;background:#edf4fb!important;color:#3e5874!important;
+  border:1px solid #d6e3ef!important;z-index:5!important;
+}
+
+/* Left column: compact, continuous checkout flow */
+#checkoutModal .kw-co-recipient{display:none!important}
+#checkoutModal .kw-co-section{
+  grid-area:auto!important;grid-column:1!important;box-sizing:border-box!important;
+  width:100%!important;margin:0 0 12px!important;padding:16px 18px!important;
+  background:#fff!important;border:1px solid #d8e5f1!important;border-radius:14px!important;
+  box-shadow:0 3px 12px rgba(32,78,120,.04)!important;
+}
+#checkoutModal .kw-co-recipient + .kw-co-section{grid-area:address!important}
+#checkoutModal .kw-co-shipping{grid-area:shipping!important}
+#checkoutModal .kw-co-payment{grid-area:payment!important}
+#checkoutModal .kw-co-voucher-final{grid-area:voucher!important}
+#checkoutModal .kw-co-section:nth-of-type(2){grid-area:main!important;grid-row:2!important}
+#checkoutModal .kw-co-section:nth-of-type(2)~.kw-co-shipping,
+#checkoutModal .kw-co-section:nth-of-type(2)~.kw-co-payment,
+#checkoutModal .kw-co-section:nth-of-type(2)~.kw-co-voucher-final{grid-column:1!important}
+#checkoutModal .kw-co-title{display:flex!important;align-items:center!important;gap:10px!important;margin:0 0 11px!important}
+#checkoutModal .kw-co-title>b{
+  width:36px!important;height:36px!important;flex:0 0 36px!important;display:grid!important;place-items:center!important;
+  border-radius:50%!important;background:#1769e8!important;color:#fff!important;font-size:14px!important;font-weight:900!important;
+}
+#checkoutModal .kw-co-title strong{display:block!important;color:#081f56!important;font-size:15px!important;font-weight:900!important}
+#checkoutModal .kw-co-title small{display:block!important;margin-top:2px!important;color:#667c98!important;font-size:9px!important}
+#checkoutModal .kw-co-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+#checkoutModal .kw-co-full{grid-column:1/-1!important}
+#checkoutModal .field{margin:0 0 7px!important}
+#checkoutModal .field label{display:block!important;margin:0 0 4px!important;font-size:9px!important;font-weight:850!important;color:#19355b!important}
+#checkoutModal .field input,#checkoutModal .field textarea,#checkoutModal .kw-location-trigger{
+  width:100%!important;box-sizing:border-box!important;border:1px solid #d1dfec!important;border-radius:8px!important;
+  background:#fff!important;color:#17345d!important;font-size:10px!important;
+}
+#checkoutModal .field input{height:39px!important;padding:0 10px!important}
+#checkoutModal .field textarea{height:58px!important;min-height:58px!important;padding:9px 10px!important;resize:none!important}
+#checkoutModal .kw-location-trigger{
+  height:42px!important;min-height:42px!important;padding:0 10px!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;text-align:left!important;
+}
+#checkoutModal .kw-location-trigger b{color:#1769e8!important;font-size:16px!important}
+#checkoutModal .kw-co-shipping .checkout-summary-row{
+  margin:0 0 8px!important;padding:9px 10px!important;display:flex!important;justify-content:space-between!important;
+  border:1px solid #d9e6f2!important;border-radius:8px!important;background:#f4f9ff!important;color:#5e7592!important;font-size:9px!important;
+}
+#checkoutModal .checkout-shipping-options{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px!important}
+#checkoutModal .checkout-shipping-empty{grid-column:1/-1!important;padding:11px!important;border:1px dashed #c9dbea!important;border-radius:8px!important;background:#fbfdff!important;color:#8394aa!important;font-size:8px!important;text-align:center!important}
+#checkoutModal .mk-payment-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px!important}
+#checkoutModal .mk-payment-option{min-height:62px!important;padding:8px!important;border-radius:9px!important}
+#checkoutModal .kw-co-voucher-final .kw-co-title{display:none!important}
+#checkoutModal .kw-voucher{display:grid!important;grid-template-columns:1fr auto!important;gap:8px!important}
+#checkoutModal .kw-voucher input{height:39px!important;box-sizing:border-box!important;border:1px solid #d1dfec!important;border-radius:8px!important;padding:0 10px!important}
+#checkoutModal .kw-voucher .smallbtn{height:39px!important;min-width:92px!important;border:0!important;border-radius:8px!important;background:#1769e8!important;color:#fff!important}
+
+/* Right column: one compact marketplace summary stack */
+#checkoutModal .kw-co-aside{
+  grid-area:aside!important;grid-column:2!important;grid-row:2!important;align-self:start!important;
+  display:flex!important;flex-direction:column!important;gap:10px!important;min-width:0!important;
+}
+#checkoutModal .kw-co-items{
+  width:100%!important;box-sizing:border-box!important;margin:0!important;padding:0!important;
+  background:#fff!important;border:1px solid #d8e5f1!important;border-radius:14px!important;
+  overflow:hidden!important;box-shadow:0 3px 12px rgba(32,78,120,.04)!important;
+}
+#checkoutModal .kw-co-items:before{
+  content:"Ringkasan Pesanan"!important;display:block!important;padding:17px 18px 13px!important;
+  color:#081f56!important;font-size:17px!important;font-weight:900!important;border-bottom:1px solid #e6eef6!important;
+}
+#checkoutModal .kw-co-items .checkout-summary-row{
+  margin:0!important;padding:11px 18px!important;display:flex!important;justify-content:space-between!important;gap:10px!important;
+  border:0!important;border-bottom:1px solid #edf2f7!important;background:#fff!important;color:#244064!important;font-size:9px!important;
+}
+#checkoutModal .kw-co-items .checkout-summary-row:last-child{border-bottom:0!important}
+#checkoutModal .kw-co-total{
+  width:100%!important;box-sizing:border-box!important;margin:0!important;padding:14px 18px!important;
+  display:flex!important;justify-content:space-between!important;align-items:center!important;
+  background:#fff!important;border:1px solid #d8e5f1!important;border-radius:11px!important;
+}
+#checkoutModal .kw-co-total span{font-size:12px!important;font-weight:850!important;color:#18355d!important}
+#checkoutModal .kw-co-total strong{font-size:22px!important;color:#0878f9!important}
+#checkoutModal .kw-co-pay{
+  width:100%!important;height:47px!important;margin:0!important;box-sizing:border-box!important;
+  border:0!important;border-radius:9px!important;background:#0878f9!important;color:#fff!important;font-size:13px!important;font-weight:900!important;
+  box-shadow:0 6px 16px rgba(8,120,249,.17)!important;
+}
+#checkoutModal .mk-checkout-trust{
+  width:100%!important;box-sizing:border-box!important;margin:0!important;padding:12px 14px!important;
+  background:#fff!important;border:1px solid #d8e5f1!important;border-radius:12px!important;
+  box-shadow:0 3px 12px rgba(32,78,120,.04)!important;
+}
+#checkoutModal .mk-trust-head{padding:9px 10px!important;border-radius:9px!important;background:#f2f8ff!important}
+#checkoutModal .mk-trust-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px 8px!important;padding:10px 3px 2px!important}
+#checkoutModal .mk-trust-grid>div{display:flex!important;gap:7px!important;align-items:flex-start!important}
+#checkoutModal .mk-trust-grid>div>b{width:25px!important;height:25px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:#edf6ff!important;color:#1769e8!important;flex:0 0 25px!important}
+#checkoutModal .mk-trust-grid strong{display:block!important;font-size:8px!important;color:#19355b!important}
+#checkoutModal .mk-trust-grid small{display:block!important;margin-top:2px!important;font-size:7px!important;color:#71859f!important}
+
+/* Keep the real MarketKita header above checkout instead of turning checkout into a separate screen. */
+.mk2-header{position:relative!important;z-index:40!important}
+
+/* Responsive */
+@media(max-width:1050px){
+  #checkoutModal.kw-checkout-modal>.kw-checkout-box{grid-template-columns:minmax(0,1fr) 350px!important;padding-left:22px!important;padding-right:22px!important}
+  #checkoutModal .checkout-shipping-options,#checkoutModal .mk-payment-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:800px){
+  #checkoutModal.kw-checkout-modal{top:0!important;height:100dvh!important;z-index:60!important}
+  #checkoutModal.kw-checkout-modal>.kw-checkout-box{display:flex!important;flex-direction:column!important;gap:10px!important;padding:14px!important;overflow-y:auto!important}
+  #checkoutModal .kw-co-head{min-height:68px!important}
+  #checkoutModal .kw-co-head:after{display:none!important}
+  #checkoutModal .kw-co-section,#checkoutModal .kw-co-aside{width:100%!important}
+  #checkoutModal .kw-co-grid,#checkoutModal .checkout-shipping-options,#checkoutModal .mk-payment-grid,#checkoutModal .mk-trust-grid{grid-template-columns:1fr!important}
+}
+</style></head>
 
 <body>
 <div class="mk2-top"><div class="container"><span>🚚 Gratis ongkir minimal pembelian Rp 200.000</span><span>Diskon 10% untuk pembelian pertama</span><span>Aman • Cepat • Terpercaya</span></div></div>
@@ -5739,7 +5775,8 @@ html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!impo
       <button class="close-btn" type="button" onclick="closeCheckout()">×</button>
     </div>
 
-    <div id="checkoutItems" class="checkout-summary kw-co-items"></div>
+    <aside class="kw-co-aside" aria-label="Ringkasan dan pembayaran">
+      <div id="checkoutItems" class="checkout-summary kw-co-items"></div>
 
     <section class="kw-co-section kw-co-recipient">
       <div class="kw-co-title"><b>1</b><div><strong>Data penerima</strong><small>Pastikan nama dan nomor WhatsApp sudah benar.</small></div></div>
@@ -5800,6 +5837,7 @@ html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!impo
         <div><b>♙</b><span><strong>Layanan Customer Service</strong><small>Siap membantu 24/7</small></span></div>
       </div>
     </div>
+    </aside>
   </div>
 </div>
 
