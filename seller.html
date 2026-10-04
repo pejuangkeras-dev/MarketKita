@@ -1552,7 +1552,7 @@ async function loadSellerReviews(){
       const id=String(x.id);
       const replied=!!String(x.seller_reply||'').trim();
       return '<div class="seller-review-row">'+
-        '<div class="seller-review-row-head"><div><div class="seller-review-row-product">'+esc(productsMap.get(String(x.product_id))||'Produk MarketKita')+'</div><div class="seller-review-row-meta">Pembeli · '+new Date(x.created_at).toLocaleString('id-ID')+'</div></div><strong>'+Number(x.rating||0)+'/5</strong></div>'+
+        '<div class="seller-review-row-head"><div><div class="seller-review-row-product">'+esc(productsMap.get(String(x.product_id))||'Produk MarketKita')+'</div><div class="seller-review-row-meta">Pembelian terverifikasi ✓ · Pembeli · '+new Date(x.created_at).toLocaleString('id-ID')+'</div></div><strong>'+Number(x.rating||0)+'/5</strong></div>'+
         '<div class="seller-review-stars">'+('★★★★★'.split('').map((s,i)=>i<Number(x.rating||0)?'★':'☆').join(''))+'</div>'+
         '<div class="seller-review-comment">'+esc(x.review_text||'')+'</div>'+
         (replied?'<div class="seller-review-reply"><strong>Balasan Anda</strong><div>'+esc(x.seller_reply)+'</div><small>'+esc(x.seller_replied_at?new Date(x.seller_replied_at).toLocaleString('id-ID'):'')+'</small></div>':'')+
