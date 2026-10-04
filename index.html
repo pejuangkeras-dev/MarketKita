@@ -6941,7 +6941,7 @@ function updateCart(){
     const checked=g.items.every(({i})=>cart[i]._selected!==false);
     const subtotal=g.items.reduce((sum,{x})=>sum+Number(x.price||0)*Number(x.quantity||0),0);
     return '<section class="p4-store-group" data-store="'+escDetail(g.key)+'">'+
-      '<div class="p4-store-head"><input type="checkbox" '+(checked?'checked':'')+' onchange="toggleCartStore(''+escDetail(g.key)+'',this.checked)" aria-label="Pilih semua produk dari '+escDetail(g.name)+'">'+
+      '<div class="p4-store-head"><input type="checkbox" '+(checked?'checked':'')+' onchange="toggleCartStore(\''+escDetail(g.key)+'\',this.checked)" aria-label="Pilih semua produk dari '+escDetail(g.name)+'">'+
       '<span>🏪</span><strong>'+escDetail(g.name)+'</strong><small>'+g.items.length+' produk</small></div>'+
       '<div class="p4-store-items">'+g.items.map(({x,i,p})=>{
         const selected=x._selected!==false;
