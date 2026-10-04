@@ -21,6 +21,13 @@ test.describe("P16 — Core Stability & Recovery", () => {
     await expect(page.locator("#cartBtn")).toBeVisible();
     await expect(page.locator("#loginBtn")).toBeVisible();
 
+    const duplicateDomIds = await page.evaluate(() => {
+      const counts = new Map();
+      document.querySelectorAll("[id]").forEach(el => counts.set(el.id, (counts.get(el.id) || 0) + 1));
+      return [...counts.entries()].filter(([, count]) => count > 1);
+    });
+    expect(duplicateDomIds).toEqual([]);
+
     expect(errors).toEqual([]);
   });
 
@@ -36,6 +43,7 @@ test.describe("P16 — Core Stability & Recovery", () => {
     const styleClose = (html.match(/<\\/style>/gi) || []).length;
     expect(styleOpen).toBe(styleClose);
     expect(html).not.toMatch(/<\\/style>\\s*<\\/style>/i);
+    expect(html).not.toMatch(/<style>[^]*<style>/i);
     expect(html).toContain('<link rel="stylesheet" href="/marketkita-design-v3.css?v=3">');
 
     const failures = [];
