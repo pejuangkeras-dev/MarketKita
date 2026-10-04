@@ -59,7 +59,8 @@ export async function onRequestGet({request,env}){
     const decorated=reviews.map(x=>({
       ...x,
       reviewer_name:names.get(String(x.buyer_id))||"Pembeli",
-      comment:x.review_text||""
+      comment:x.review_text||"",
+      verified_purchase:true
     }))
     const rating=decorated.length
       ? decorated.reduce((a,x)=>a+Number(x.rating||0),0)/decorated.length
