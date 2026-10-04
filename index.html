@@ -5555,7 +5555,7 @@ html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!impo
     </section>
 
     <section class="kw-co-section">
-      <div class="kw-co-title"><b>2</b><div><strong>Alamat pengiriman</strong><small>Pilih lokasi secara otomatis agar ongkir lebih akurat.</small></div></div>
+      <div class="kw-co-title"><b>1</b><div><strong>Alamat pengiriman</strong><small>Pilih lokasi secara otomatis agar ongkir lebih akurat.</small></div></div>
       <div class="field kw-co-full"><label>Lokasi tujuan</label>
         <button type="button" id="buyerLocationPickerButton" class="kw-location-trigger" onclick="openLocationPicker()">
           <span id="buyerLocationPickerText">Pilih provinsi, kota/kabupaten, kecamatan & kode pos</span><b>›</b>
@@ -5572,13 +5572,13 @@ html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!impo
     </section>
 
     <section class="kw-co-section kw-co-shipping">
-      <div class="kw-co-title"><b>3</b><div><strong>Pilih pengiriman</strong><small>Ongkir dihitung berdasarkan alamat tujuan.</small></div></div>
+      <div class="kw-co-title"><b>2</b><div><strong>Pilih pengiriman</strong><small>Ongkir dihitung berdasarkan alamat tujuan.</small></div></div>
       <div id="checkoutShippingSummary" class="checkout-summary-row"><span>Ongkir</span><strong>Rp0 <small>(pilih alamat)</small></strong></div>
       <div id="checkoutShippingOptions" class="checkout-shipping-options"><div class="checkout-shipping-empty">Pilih alamat untuk menghitung ongkir.</div></div>
     </section>
 
     <section class="kw-co-section kw-co-payment">
-  <div class="kw-co-title"><b>4</b><div><strong>Metode Pembayaran</strong><small>Pilih metode pembayaran yang Anda inginkan.</small></div></div>
+  <div class="kw-co-title"><b>3</b><div><strong>Metode Pembayaran</strong><small>Pilih metode pembayaran yang Anda inginkan.</small></div></div>
   <div class="mk-payment-grid">
     <button type="button" class="mk-payment-option active" data-payment="bank" onclick="selectCheckoutPayment(this)"><span class="mk-pay-icon">▣</span><span><strong>Transfer Bank</strong><small>BCA, BNI, BRI, Mandiri, dll</small></span><i>●</i></button>
     <button type="button" class="mk-payment-option" data-payment="ewallet" onclick="selectCheckoutPayment(this)"><span class="mk-pay-icon">◉</span><span><strong>E-Wallet</strong><small>OVO, DANA, GoPay</small></span><i>○</i></button>
@@ -5588,7 +5588,7 @@ html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!impo
 </section>
 
 <section class="kw-co-section kw-co-voucher-final">
-  <div class="kw-co-title"><b>5</b><div><strong>Voucher</strong><small>Gunakan voucher yang sudah Anda klaim.</small></div></div>
+  <div class="kw-co-title"><b>4</b><div><strong>Voucher</strong><small>Gunakan voucher yang sudah Anda klaim.</small></div></div>
   <div class="kw-voucher"><input id="checkoutVoucher" placeholder="Masukkan kode voucher"><button type="button" class="smallbtn" onclick="validateCheckoutVoucher()">Terapkan</button></div>
   <div id="checkoutVoucherMessage" class="kw-voucher-msg"></div><div id="checkoutPromotionSummary" class="mk-g4-promo"></div>
 </section>
@@ -7510,7 +7510,7 @@ async function locationPickerFetch(path){
 }
 async function openLocationPicker(){
   const m=locationPickerModal();if(!m)return;
-  m.classList.add("open");m.setAttribute("aria-hidden","false");kwLocationPicker.searchMode=false;kwLocationPicker.level="province";
+  // Keep checkout mounted and above every page drawer while the location picker is open.\n  const checkout=document.getElementById("checkoutModal");\n  if(checkout){checkout.classList.add("show");checkout.setAttribute("aria-hidden","false");}\n  document.getElementById("drawer")?.classList.remove("show");\n  m.classList.add("open");m.setAttribute("aria-hidden","false");kwLocationPicker.searchMode=false;kwLocationPicker.level="province";
   const q=document.getElementById("locationPickerSearch");if(q)q.value="";
   const list=document.getElementById("locationPickerList");if(list)list.innerHTML='<div class="kw-location-loading">Memuat provinsi...</div>';
   try{if(!kwLocationPicker.provinceRows.length)kwLocationPicker.provinceRows=await locationPickerFetch("/api/location-provinces");renderLocationPicker();}
@@ -7892,8 +7892,7 @@ function openCheckout(){
   document.getElementById("checkoutTotal").textContent=
     rupiah(cart.reduce((s,x)=>s+x.price*x.quantity,0));
 
-  document.getElementById("checkoutModal").classList.add("show");
-  document.getElementById("checkoutModal").setAttribute("aria-hidden","false");
+  // Checkout owns the viewport while open; close the cart drawer so it can never sit above/alongside checkout.\n  document.getElementById("drawer")?.classList.remove("show");\n  document.getElementById("checkoutModal").classList.add("show");\n  document.getElementById("checkoutModal").setAttribute("aria-hidden","false");
   prefillBuyerCheckout();
 }
 
@@ -10767,5 +10766,23 @@ html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!impo
 #checkoutModal .kw-co-pay{grid-column:2!important;grid-row:6!important;width:100%!important;height:48px!important;margin:12px 0 0!important;border:0!important;border-radius:10px!important;background:#1769e8!important;color:#fff!important;font-size:13px!important;font-weight:900!important}
 @media(max-width:1000px){#checkoutModal .kw-checkout-box{width:min(760px,calc(100vw - 24px))!important;grid-template-columns:1fr!important;padding:0 18px 28px!important}#checkoutModal .kw-co-items,#checkoutModal .kw-co-total,#checkoutModal .kw-co-pay{grid-column:1!important}#checkoutModal .kw-co-items{grid-row:3!important}#checkoutModal .kw-co-recipient{grid-row:2!important}#checkoutModal .kw-co-section:nth-of-type(2){grid-row:4!important}#checkoutModal .kw-co-shipping{grid-row:5!important}#checkoutModal .kw-co-payment{grid-row:6!important}#checkoutModal .kw-co-voucher-final{grid-row:7!important}#checkoutModal .kw-co-total{grid-row:8!important;align-self:start!important}#checkoutModal .kw-co-pay{grid-row:9!important}#checkoutModal .kw-co-head:after{display:none!important}}
 @media(max-width:700px){#checkoutModal .kw-checkout-box{width:100vw!important;min-height:100dvh!important;margin:0!important;border-radius:0!important;padding:0 12px 24px!important}#checkoutModal .kw-co-head{min-height:82px!important;padding:18px 0!important}#checkoutModal .kw-co-head h3{font-size:23px!important}#checkoutModal .kw-co-grid{grid-template-columns:1fr!important}#checkoutModal .kw-co-full{grid-column:auto!important}#checkoutModal .checkout-shipping-options,#checkoutModal .mk-payment-grid{grid-template-columns:1fr!important}}
+</style><style id="marketkita-checkout-location-layer-final-20261004">
+#checkoutModal.kw-checkout-modal{z-index:2147483000!important}
+#checkoutModal.kw-checkout-modal.show{display:flex!important}
+#locationPickerModal.kw-location-modal{position:fixed!important;inset:0!important;z-index:2147483600!important;display:none!important;align-items:center!important;justify-content:center!important;padding:16px!important;background:rgba(7,29,59,.64)!important;backdrop-filter:blur(3px)!important;isolation:isolate!important}
+#locationPickerModal.kw-location-modal.open{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+#locationPickerModal .kw-location-dialog{position:relative!important;z-index:1!important;width:min(560px,calc(100vw - 32px))!important;max-height:min(680px,calc(100dvh - 32px))!important;background:#fff!important;border:1px solid #dce8f4!important;border-radius:16px!important;box-shadow:0 28px 90px rgba(3,25,55,.38)!important}
+#locationPickerModal .kw-location-head{background:#fff!important}
+#locationPickerModal .kw-location-tabs button.active{color:#1769e8!important;border-bottom-color:#1769e8!important}
+#locationPickerModal .kw-location-list{background:#fff!important;z-index:2!important}
+#locationPickerModal .kw-location-item:hover{background:#eef6ff!important}
+#checkoutModal .kw-co-recipient{display:none!important}
+#checkoutModal .kw-co-section:nth-of-type(2){grid-row:3!important}
+#checkoutModal .kw-co-shipping{grid-row:4!important}
+#checkoutModal .kw-co-payment{grid-row:5!important}
+#checkoutModal .kw-co-voucher-final{grid-row:6!important}
+#checkoutModal .kw-co-items{grid-row:2!important}
+@media(max-width:1000px){#checkoutModal .kw-co-items{grid-row:2!important}#checkoutModal .kw-co-section:nth-of-type(2){grid-row:3!important}#checkoutModal .kw-co-shipping{grid-row:4!important}#checkoutModal .kw-co-payment{grid-row:5!important}#checkoutModal .kw-co-voucher-final{grid-row:6!important}}
+@media(max-width:700px){#locationPickerModal.kw-location-modal{padding:0!important;align-items:flex-end!important}#locationPickerModal .kw-location-dialog{width:100vw!important;max-height:90dvh!important;border-radius:16px 16px 0 0!important}}
 </style></body>
 </html>
