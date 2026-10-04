@@ -5195,6 +5195,11 @@ window.selectCheckoutPayment=function(btn){
  #drawer .cart-panel{width:100vw!important}.p4-cart-item{grid-template-columns:20px 62px minmax(0,1fr)}
 }
 </style>
+<style id="marketkita-p4-empty">
+#drawer .p4-empty-cart{padding:48px 18px;text-align:center;background:#fff;border:1px dashed #d5e2ee;border-radius:12px;margin:8px 0}
+#drawer .p4-empty-cart strong{display:block;margin-top:9px;color:#17345c;font-size:12px}
+#drawer .p4-empty-cart small{display:block;margin-top:5px;color:#8494a8;font-size:8px}
+</style>
 </head>
 
 <body>
@@ -7819,6 +7824,8 @@ function openCheckout(){
     return;
   }
 
+  if(!prepareSelectedCartForCheckout()) return;
+
   // Checkout wajib melalui akun agar alamat, pesanan, pembayaran,
   // voucher, dan riwayat transaksi terikat ke pelanggan.
   if(!kwCurrentUser){
@@ -7893,6 +7900,7 @@ function closeCheckout(e){
   if(e && e.target!==modal) return;
   modal.classList.remove("show");
   modal.setAttribute("aria-hidden","true");
+  restoreCartAfterCheckoutClose();
 }
 
 /* =========================
@@ -8047,6 +8055,18 @@ async function startPayment(e){
     window.snap.pay(data.token,{
       onSuccess:function(){
         if(typeof window.marketKitaTrack==="function")window.marketKitaTrack("purchase_success",{voucher_id:window.marketCheckoutVoucherId||null,metadata:{payment:"midtrans"}});
+        // Remove only the items that were actually checked out; leave unselected
+        // products in the cart for the next purchase.
+        if(Array.isArray(window.__checkoutCartSnapshot)){
+          const purchasedKeys=new Set(cart.map(x=>String(x.product_id||x.productIndex)+"|"+String(x.size||"")+"|"+String(x.color||"")));
+          cart=window.__checkoutCartSnapshot.filter(original=>{
+            const key=String(original.product_id||original.productIndex)+"|"+String(original.size||"")+"|"+String(original.color||"");
+            return !purchasedKeys.has(key);
+          });
+          window.__checkoutCartSnapshot=null;
+          updateCart();
+        }
+        closeCheckout();
         showKwNotice(t("payment_success"),t("payment_success_title"));
       },
       onPending:function(){
