@@ -121,7 +121,9 @@
     }catch(e){list.innerHTML='<div class="review-empty">Ulasan toko belum tersedia. Silakan coba lagi.</div>';}
   };
 
-  window.chooseProductRating=function(n){window.selectedProductRating=Math.max(1,Math.min(5,Number(n)||5));document.querySelectorAll("#productReviewStarsInput button").forEach((b,i)=>b.classList.toggle("active",i<window.selectedProductRating));};\n\n  window.submitProductReview=async function(){
+  window.chooseProductRating=function(n){window.selectedProductRating=Math.max(1,Math.min(5,Number(n)||5));document.querySelectorAll("#productReviewStarsInput button").forEach((b,i)=>b.classList.toggle("active",i<window.selectedProductRating));};
+
+  window.submitProductReview=async function(){
     const msg=document.getElementById("productReviewFormMsg"),p=window.products?.[window.productDetailIndex];
     if(!p?.id||!p?.store_id){if(msg)msg.textContent="Produk atau toko tidak ditemukan.";return;}
     const token=await sessionToken();
