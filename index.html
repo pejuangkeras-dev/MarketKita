@@ -5027,6 +5027,35 @@ window.selectCheckoutPayment=function(btn){
 @media(max-width:1200px){.mk2-store-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:700px){.mk2-store-grid{display:flex;overflow-x:auto;gap:7px;scrollbar-width:none}.mk2-store-grid::-webkit-scrollbar{display:none}.mk2-store-card{flex:0 0 205px}.mk2-store-section{padding-top:10px}}
 </style>
+<style id="marketkita-p2-product-detail">
+/* P2 — Marketplace product detail */
+.p2-detail-badges{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 8px}
+.p2-badge{display:inline-flex;align-items:center;padding:5px 8px;border-radius:999px;background:#eaf3ff;color:#1264f4;font-size:9px;font-weight:900}
+.p2-badge.soft{background:#f2f6fb;color:#61738b}
+.p2-trust-row{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0;padding:11px;border:1px solid #e4edf7;border-radius:11px;background:#f8fbff}
+.p2-trust-row span{font-size:8px;color:#526a86;font-weight:750}
+.p2-buy-card{border:1px solid #e2ebf5;border-radius:13px;padding:13px;background:#fff}
+.p2-buy-card .product-detail-section{border-top:0;padding-top:0}
+.p2-quantity-row{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;padding:12px 0;border-top:1px solid #edf2f7}
+.p2-quantity-row h4{margin:0 0 7px;font-size:9px;color:#17345c}
+.p2-qty{display:flex;align-items:center;border:1px solid #d5e1ee;border-radius:8px;overflow:hidden;height:34px}
+.p2-qty button{width:34px;height:100%;border:0;background:#f5f8fc;color:#17345c;font-size:18px}
+.p2-qty input{width:42px;height:100%;border:0;border-left:1px solid #e2e9f1;border-right:1px solid #e2e9f1;text-align:center;outline:0;font-size:10px}
+.p2-stock{text-align:right}.p2-stock strong{display:block;color:#168448;font-size:9px}.p2-stock span{display:block;color:#8796a9;font-size:7px;margin-top:3px}
+.p2-shipping,.p2-voucher{display:flex;gap:9px;align-items:flex-start;padding:10px 0;border-top:1px solid #edf2f7}
+.p2-shipping strong,.p2-voucher strong{min-width:105px;color:#17345c;font-size:8px}.p2-shipping span,.p2-voucher span{color:#71839a;font-size:8px;line-height:1.45}
+.p2-color-list{display:flex;gap:8px}.p2-color-dot{width:27px;height:27px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #cbd8e6;background:var(--p2-color);cursor:pointer}.p2-color-dot.active{box-shadow:0 0 0 2px #1264f4}
+.p2-no-variant{font-size:8px;color:#8796a9}
+.p2-seller-stats{display:flex;gap:0;margin-top:10px;padding:10px 0;border-top:1px solid #edf2f7;border-bottom:1px solid #edf2f7}
+.p2-seller-stats span{flex:1;padding:0 9px;border-right:1px solid #e6edf5;font-size:7px;color:#8796a9}.p2-seller-stats span:first-child{padding-left:0}.p2-seller-stats span:last-child{border-right:0}.p2-seller-stats b{display:block;color:#17345c;font-size:10px;margin-bottom:2px}
+.p2-store-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#fff!important;color:#1264f4!important;border:1px solid #bdd4f1!important;border-radius:8px;padding:0 12px;font-size:8px;font-weight:850;min-height:32px}
+@media(max-width:760px){
+ .p2-trust-row{display:grid;grid-template-columns:1fr 1fr}.p2-trust-row span{font-size:7px}
+ .p2-buy-card{padding:10px}.p2-quantity-row{align-items:center}.p2-shipping,.p2-voucher{display:block}.p2-shipping strong,.p2-voucher strong{display:block;margin-bottom:4px}
+ .p2-seller-stats span{font-size:7px}.p2-seller-stats b{font-size:9px}
+ .p2-store-link{width:100%}
+}
+</style>
 </head>
 
 <body>
@@ -6362,16 +6391,25 @@ function openProductDetail(i){
         <div class="product-detail-thumbs">${imgs.map((src,j)=>`<img class="product-detail-thumb ${j===0?"active":""}" src="${escDetail(optimizeProductImage(src,220,220,70))}" data-fallback-src="${escDetail(src)}" loading="lazy" decoding="async" onclick="setProductDetailImage(${j},event)" alt="${escDetail(p.name)} ${j+1}">`).join("")}</div>
       </div>
       <div class="product-detail-info">
-        <div class="product-detail-eyebrow">MarketKita · Detail Produk</div>
+        <div class="product-detail-eyebrow">MARKETKITA · DETAIL PRODUK</div>
+        <div class="p2-detail-badges"><span class="p2-badge">✓ Produk Marketplace</span>${p.badge?'<span class="p2-badge soft">'+escDetail(p.badge)+'</span>':""}</div>
         <h1 class="product-detail-title">${escDetail(p.name)}</h1>
         <p class="product-detail-price">${rupiah(p.price)}</p>
-        <div class="product-detail-rating"><span>${stars(p.productRating||0)}</span><strong>${p.productRating?Number(p.productRating).toFixed(1):"—"}</strong><span>${Number(p.reviewCount||0)} ulasan produk</span></div>
-        <div class="product-detail-section"><h4>Deskripsi</h4><div class="product-detail-desc">${escDetail(p.desc||"Produk MarketKita.")}</div></div>
-        <div class="product-detail-section"><h4>Pilih Ukuran</h4><div id="detailSizes" class="product-detail-sizes">${detailSizes.map((size,j)=>`<button class="product-detail-size ${j===0?"active":""}" type="button" onclick="selectDetailSize(this,'${escDetail(size)}')">${escDetail(size)}</button>`).join("")}</div></div>
-        <div class="product-detail-actions"><button class="product-detail-btn light" type="button" onclick="detailAddToCart()">🛒 Tambah ke Keranjang</button><button class="product-detail-btn dark" type="button" onclick="detailBuyNow()">Beli Sekarang</button></div>
+        <div class="product-detail-rating"><span>${stars(p.productRating||0)}</span><strong>${p.productRating?Number(p.productRating).toFixed(1):"—"}</strong><span>${Number(p.reviewCount||0)} ulasan</span><i></i><span>Kategori: ${escDetail(p.category||"Umum")}</span></div>
+        <div class="p2-trust-row"><span>🛡️ Perlindungan Pembeli</span><span>↩️ Dukungan Pengembalian</span><span>🔒 Pembayaran Aman</span></div>
+        <div class="p2-buy-card">
+          <div class="product-detail-section"><h4>Deskripsi</h4><div class="product-detail-desc">${escDetail(p.desc||"Produk MarketKita.")}</div></div>
+          <div class="product-detail-section"><h4>Pilih Ukuran</h4><div id="detailSizes" class="product-detail-sizes">${detailSizes.length?detailSizes.map((size,j)=>`<button class="product-detail-size ${j===0?"active":""}" type="button" onclick="selectDetailSize(this,'${escDetail(size)}')">${escDetail(size)}</button>`).join(""):'<span class="p2-no-variant">Tidak ada variasi ukuran.</span>'}</div></div>
+          ${Array.isArray(p.colors)&&p.colors.length?'<div class="product-detail-section"><h4>Pilihan Warna</h4><div class="p2-color-list">'+p.colors.map((c,j)=>'<button type="button" class="p2-color-dot '+(j===0?'active':'')+'" title="'+escDetail(c)+'" style="--p2-color:'+escDetail(c)+'" onclick="selectDetailColor(this)"></button>').join("")+'</div></div>':""}
+          <div class="p2-quantity-row"><div><h4>Jumlah</h4><div class="p2-qty"><button type="button" onclick="changeDetailQty(-1)">−</button><input id="detailQuantity" value="1" inputmode="numeric" aria-label="Jumlah produk" oninput="sanitizeDetailQty()"><button type="button" onclick="changeDetailQty(1)">+</button></div></div><div class="p2-stock"><strong>Tersedia</strong><span>Pilih variasi sesuai kebutuhan</span></div></div>
+          <div class="p2-shipping"><strong>🚚 Pengiriman</strong><span>Ongkir dan pilihan kurir dihitung berdasarkan alamat saat checkout.</span></div>
+          <div class="p2-voucher"><strong>🏷️ Voucher &amp; promo</strong><span>Gunakan voucher yang tersedia saat checkout untuk mendapatkan potongan harga.</span></div>
+          <div class="product-detail-actions"><button class="product-detail-btn light" type="button" onclick="detailAddToCart()">🛒 Tambah ke Keranjang</button><button class="product-detail-btn dark" type="button" onclick="detailBuyNow()">Beli Sekarang</button></div>
+        </div>
         <div class="seller-card" data-store-id="${escDetail(store.id||"")}">
           <div class="seller-card-top"><div class="seller-avatar">${escDetail(initial)}</div><div class="seller-meta"><strong>${escDetail(storeName)}</strong><span>${escDetail(store.slug?"@"+store.slug:"Toko MarketKita")} · ${store.description?escDetail(store.description):"Seller MarketKita"}</span></div><div class="seller-rating"><strong id="detailSellerRating">—</strong><span id="detailSellerReviewCount">0 ulasan</span></div></div>
-          <div class="seller-actions"><button type="button" onclick="openSellerChat()">Chat Seller</button><button type="button" onclick="scrollProductDetailTo('sellerReviewSection')">Ulasan Toko</button></div>
+          <div class="p2-seller-stats"><span><b id="detailSellerRating">—</b> Rating</span><span><b id="detailSellerReviewCount">0</b> Ulasan</span><span><b>${productStoreProducts(p.store_id).length}</b> Produk</span></div>
+          <div class="seller-actions"><button type="button" onclick="openSellerChat()">💬 Chat Seller</button><a class="p2-store-link" href="/store.html?slug=${encodeURIComponent(store.slug||"")}">🏪 Kunjungi Toko</a><button type="button" onclick="scrollProductDetailTo('sellerReviewSection')">★ Ulasan Toko</button></div>
         </div>
       </div>
     </div>
@@ -6436,13 +6474,26 @@ function selectDetailSize(button,size){
   button.classList.add("active");
   window.productDetailSize=normalizeProductSize(size);
 }
+function sanitizeDetailQty(){
+  const input=document.getElementById("detailQuantity"); if(!input)return;
+  let n=parseInt(String(input.value).replace(/\D/g,""),10)||1; n=Math.max(1,Math.min(99,n)); input.value=n;
+}
+function changeDetailQty(delta){
+  const input=document.getElementById("detailQuantity"); if(!input)return;
+  sanitizeDetailQty(); input.value=Math.max(1,Math.min(99,(parseInt(input.value,10)||1)+delta));
+}
+function selectDetailColor(button){
+  document.querySelectorAll(".p2-color-dot").forEach(x=>x.classList.remove("active")); button?.classList.add("active");
+  window.productDetailColor=button?.title||"";
+}
 function detailAddToCart(){
-  const i=window.productDetailIndex;
-  const p=products[i];
-  const size=normalizeProductSize(window.productDetailSize || p.sizes?.[0]);
-  if(!p||!size)return;
+  const i=window.productDetailIndex, p=products[i]; if(!p)return;
+  const size=normalizeProductSize(window.productDetailSize || p.sizes?.[0] || "");
+  if((p.sizes||[]).length&&!size){showKwNotice?.("Pilih ukuran","Silakan pilih variasi ukuran terlebih dahulu.");return;}
+  sanitizeDetailQty();
+  const quantity=Math.max(1,Math.min(99,parseInt(document.getElementById("detailQuantity")?.value||"1",10)));
   const existing=cart.find(x=>x.productIndex===i&&normalizeProductSize(x.size)===size);
-  if(existing)existing.quantity++;else cart.push({productIndex:i,product_id:p.id,store_id:p.store_id,name:p.name,price:p.price,size,quantity:1});
+  if(existing)existing.quantity+=quantity;else cart.push({productIndex:i,product_id:p.id,store_id:p.store_id,name:p.name,price:p.price,size,quantity,color:window.productDetailColor||""});
   updateCart(); closeProductDetail(); document.getElementById("drawer")?.classList.add("show");
 }
 function detailBuyNow(){detailAddToCart(); document.getElementById("drawer")?.classList.add("show");}
