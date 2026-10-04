@@ -7897,7 +7897,11 @@ function openCheckout(){
   document.getElementById("checkoutTotal").textContent=
     rupiah(cart.reduce((s,x)=>s+x.price*x.quantity,0));
 
-  // Checkout owns the viewport while open; close the cart drawer so it can never sit above/alongside checkout.\n  document.getElementById("drawer")?.classList.remove("show");\n  document.getElementById("checkoutModal").classList.add("show");\n  document.getElementById("checkoutModal").setAttribute("aria-hidden","false");
+  // Checkout owns the viewport while open; close the cart drawer so it can never sit above/alongside checkout.
+  document.getElementById("drawer")?.classList.remove("show");
+  document.body.classList.remove("mk-cart-open");
+  document.getElementById("checkoutModal").classList.add("show");
+  document.getElementById("checkoutModal").setAttribute("aria-hidden","false");
   prefillBuyerCheckout();
 }
 
