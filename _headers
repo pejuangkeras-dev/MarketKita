@@ -29,3 +29,13 @@
 /pwa-p35.js
   Cache-Control: public, max-age=3600
   CDN-Cache-Control: public, max-age=3600
+
+/
+  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
+
+/*.html
+  Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
