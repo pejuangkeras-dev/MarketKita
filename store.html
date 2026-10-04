@@ -3,49 +3,236 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#111311">
+<meta name="theme-color" content="#1264f4">
 <title>MarketKita — Toko</title>
 <style>
-:root{--bg:#f7f5f0;--paper:#fffdf9;--ink:#171817;--muted:#77736c;--line:#ded9cf;--dark:#111311}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}.container{width:min(1180px,92%);margin:auto}
-.nav{position:sticky;top:0;z-index:20;background:rgba(255,253,249,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}.logo{font-size:23px;font-weight:950;letter-spacing:-.04em}.back{border:1px solid var(--line);background:#fffdf9;border-radius:11px;padding:10px 14px;font-weight:800}
-.hero{padding:38px 0 22px}.store-card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:30px;display:flex;align-items:center;justify-content:space-between;gap:25px}.store-main{display:flex;align-items:center;gap:18px}.avatar{width:72px;height:72px;border-radius:20px;background:var(--dark);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:950}.eyebrow{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#858078;font-weight:900}.store-name{margin:5px 0;font-size:34px;letter-spacing:-.055em}.store-desc{margin:0;color:var(--muted);line-height:1.6;max-width:680px}.store-meta{margin-top:9px;font-size:12px;color:#666}
-.section{padding:20px 0 70px}.head{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}.head h2{margin:0;font-size:30px;letter-spacing:-.05em}.head span{font-size:12px;color:var(--muted)}
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:var(--paper);border:1px solid var(--line);border-radius:17px;overflow:hidden}.photo{aspect-ratio:4/5;background:#ece8e0}.photo img{width:100%;height:100%;object-fit:cover}.body{padding:15px}.body h3{margin:0 0 7px;font-size:15px}.price{font-weight:900}.btn{width:100%;margin-top:12px;height:42px;border:0;border-radius:10px;background:var(--dark);color:#fff;font-weight:850}.empty,.loading{padding:40px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px;background:var(--paper)}
-@media(max-width:900px){.products{grid-template-columns:repeat(3,1fr)}}@media(max-width:650px){.store-card{align-items:flex-start;flex-direction:column}.store-name{font-size:28px}.products{grid-template-columns:repeat(2,1fr);gap:12px}}@media(max-width:430px){.products{grid-template-columns:1fr}}
+:root{
+  --blue:#1264f4;--blue2:#0b55d4;--navy:#102b57;--text:#263b59;--muted:#7b8ba1;
+  --bg:#f4f7fb;--card:#fff;--line:#dce6f1;--soft:#edf5ff;--red:#ee2638;
+  --shadow:0 4px 18px rgba(18,70,130,.07);--radius:12px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}
+.container{width:min(1280px,calc(100% - 28px));margin:auto}
+
+/* Marketplace header */
+.nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(30,70,120,.05)}
+.nav-inner{min-height:64px;display:flex;align-items:center;gap:16px}
+.logo{flex:0 0 auto}.logo img{width:165px;height:auto;display:block}
+.store-search{height:40px;flex:1;max-width:600px;display:flex;border:1px solid #cbd9e8;border-radius:9px;background:#fff;overflow:hidden}
+.store-search:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(18,100,244,.08)}
+.store-search input{min-width:0;flex:1;border:0;outline:0;padding:0 13px;font-size:11px;color:var(--navy)}
+.store-search button{width:44px;border:0;background:var(--blue);color:#fff;font-size:14px}
+.nav-actions{margin-left:auto;display:flex;align-items:center;gap:4px}
+.nav-link{height:40px;min-width:52px;padding:4px 7px;border:0;border-radius:8px;background:transparent;color:#38506f;font-size:9px;font-weight:750}
+.nav-link:hover{background:var(--soft);color:var(--blue)}
+.back{height:38px;padding:0 13px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #cbd9e8;border-radius:8px;background:#fff;color:var(--navy);font-size:9px;font-weight:900}
+.back:hover{border-color:var(--blue);color:var(--blue)}
+
+/* Store identity */
+.store-strip{background:#fff;border-bottom:1px solid var(--line)}
+.store-cover{height:108px;background:linear-gradient(115deg,#dcebff 0%,#edf6ff 48%,#d8ebff 100%);position:relative;overflow:hidden}
+.store-cover:before,.store-cover:after{content:"";position:absolute;border:1px solid rgba(18,100,244,.10);border-radius:50%}
+.store-cover:before{width:220px;height:220px;right:8%;top:-145px}.store-cover:after{width:150px;height:150px;right:22%;top:-75px}
+.store-profile{position:relative;margin-top:-44px;padding-bottom:18px;display:flex;align-items:flex-end;gap:15px}
+.avatar{width:88px;height:88px;flex:0 0 88px;border:5px solid #fff;border-radius:18px;background:linear-gradient(135deg,#1264f4,#4aa1ff);color:#fff;display:grid;place-items:center;font-size:30px;font-weight:950;box-shadow:0 6px 18px rgba(18,100,244,.18)}
+.store-copy{min-width:0;flex:1;padding-bottom:2px}
+.eyebrow{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:950}
+.store-name{margin:3px 0 5px;color:var(--navy);font-size:27px;line-height:1;letter-spacing:-.045em}
+.store-desc{margin:0;color:#687b94;font-size:10px;line-height:1.45;max-width:650px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.store-meta{margin-top:6px;color:#8796aa;font-size:8px}
+.store-actions{display:flex;gap:7px;padding-bottom:3px}
+.store-btn{height:36px;padding:0 14px;border:1px solid #cbd9e8;border-radius:8px;background:#fff;color:var(--blue);font-size:9px;font-weight:900}
+.store-btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.store-btn:hover{border-color:var(--blue);box-shadow:0 4px 12px rgba(18,100,244,.10)}
+.store-stats{display:flex;gap:0;border-top:1px solid #edf2f7;padding-top:10px}
+.stat{padding:0 17px;border-right:1px solid #e8eef5;font-size:8px;color:#8291a4}
+.stat:first-child{padding-left:0}.stat:last-child{border-right:0}
+.stat strong{display:block;color:var(--navy);font-size:11px;margin-bottom:2px}
+
+/* Store navigation */
+.store-nav{background:#fff;border-top:1px solid #eef2f7;border-bottom:1px solid var(--line)}
+.store-nav-inner{display:flex;align-items:center;gap:2px;height:48px}
+.tab{height:48px;padding:0 18px;border:0;border-bottom:3px solid transparent;background:transparent;color:#61748d;font-size:10px;font-weight:850}
+.tab.active,.tab:hover{color:var(--blue);border-bottom-color:var(--blue)}
+
+/* Content */
+.main{padding:14px 0 55px}
+.breadcrumb{display:flex;align-items:center;gap:5px;margin:0 0 12px;color:#8b99aa;font-size:8px}
+.breadcrumb a{color:var(--blue);font-weight:800}
+.content-layout{display:grid;grid-template-columns:185px minmax(0,1fr);gap:12px}
+.sidebar{background:#fff;border:1px solid var(--line);border-radius:var(--radius);height:max-content;overflow:hidden;box-shadow:var(--shadow)}
+.side-title{padding:12px 13px;border-bottom:1px solid #edf2f7;color:var(--navy);font-size:10px;font-weight:950}
+.side-item{display:flex;justify-content:space-between;gap:8px;width:100%;padding:10px 13px;border:0;background:#fff;color:#62758e;text-align:left;font-size:8px}
+.side-item:hover{background:var(--soft);color:var(--blue)}
+.side-item strong{color:#9aa7b7;font-weight:700}
+
+.products-panel{min-width:0}
+.toolbar{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:9px 11px;margin-bottom:11px;display:flex;align-items:center;gap:9px;box-shadow:var(--shadow)}
+.toolbar-title{font-size:12px;font-weight:950;color:var(--navy);margin-right:auto}
+.toolbar-title span{display:block;font-size:8px;color:#8a98aa;font-weight:600;margin-top:2px}
+.sort{height:31px;border:1px solid #d6e1ec;border-radius:7px;background:#fff;color:#526984;font-size:8px;padding:0 9px}
+.products{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(20,65,115,.035);transition:.18s}
+.card:hover{transform:translateY(-2px);border-color:#c4d8ef;box-shadow:0 8px 20px rgba(20,65,115,.09)}
+.photo{aspect-ratio:1/1;background:#f5f7fa;overflow:hidden}
+.photo img{width:100%;height:100%;display:block;object-fit:cover}
+.body{padding:8px}
+.body h3{margin:0 0 6px;color:var(--navy);font-size:9px;line-height:1.3;min-height:24px;font-weight:800}
+.price{font-size:11px;color:var(--red);font-weight:950}
+.product-sub{margin-top:4px;color:#8b99aa;font-size:7px}
+.btn{width:100%;margin-top:7px;height:28px;border:0;border-radius:7px;background:var(--blue);color:#fff;font-size:8px;font-weight:900}
+.btn:hover{background:var(--blue2)}
+.empty,.loading{padding:38px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px;background:#fff;grid-column:1/-1;font-size:10px}
+
+/* Responsive */
+@media(max-width:1100px){
+  .products{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .content-layout{grid-template-columns:160px minmax(0,1fr)}
+}
+@media(max-width:800px){
+  .nav-inner{min-height:58px;gap:7px}.logo img{width:125px}.nav-link{display:none}
+  .store-search{height:34px}.store-search input{font-size:9px}.store-search button{width:36px}
+  .back{height:33px;padding:0 9px;font-size:8px}
+  .store-cover{height:82px}
+  .store-profile{margin-top:-34px;align-items:flex-start;flex-wrap:wrap;padding-bottom:13px}
+  .avatar{width:68px;height:68px;flex-basis:68px;border-radius:15px;font-size:24px}
+  .store-copy{padding-top:22px;width:calc(100% - 84px);flex-basis:calc(100% - 84px)}
+  .store-name{font-size:22px}.store-desc{font-size:9px}.store-actions{width:100%;padding-left:83px;margin-top:-4px}
+  .store-stats{width:100%;padding-left:83px}
+  .stat{padding:0 10px}.stat:first-child{padding-left:0}
+  .content-layout{display:block}.sidebar{display:none}
+  .products{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:560px){
+  .container{width:calc(100% - 14px)}
+  .logo img{width:108px}.store-search{max-width:none}
+  .back{display:none}
+  .store-name{font-size:20px}.store-desc{max-width:100%}
+  .store-actions{padding-left:0}.store-btn{flex:1}
+  .store-stats{padding-left:0}
+  .store-nav-inner{overflow-x:auto}.tab{padding:0 13px;white-space:nowrap}
+  .main{padding-top:9px}.breadcrumb{display:none}
+  .toolbar{padding:8px}.toolbar-title{font-size:10px}.sort{font-size:7px}
+  .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .body{padding:7px}.body h3{font-size:9px}.price{font-size:11px}
+}
 </style>
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/icons/marketkita-pwa.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/icons/marketkita-pwa.svg">
-<meta name="theme-color" content="#171817">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="MarketKita">
 <link rel="stylesheet" href="/marketkita-brand.css?v=20261003-brand">
 </head>
 <body>
-<header class="nav"><div class="container nav-inner"><a href="/" class="logo" aria-label="MarketKita"><img src="/icons/marketkita-brand.svg" alt="MarketKita" style="width:185px;height:auto;display:block"></a><a href="/" class="back">← Kembali ke Marketplace</a></div></header>
-<main>
-<section class="hero"><div class="container"><div id="storeCard" class="store-card"><div class="loading">Memuat toko...</div></div></div></section>
-<section class="section"><div class="container"><div class="head"><h2>Produk dari toko ini</h2><span id="productCount"></span></div><div id="products" class="products"></div></div></section>
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="/" class="logo" aria-label="MarketKita"><img src="/icons/marketkita-brand.svg" alt="MarketKita"></a>
+    <div class="store-search"><input id="storeSearch" type="search" placeholder="Cari produk di toko ini..."><button aria-label="Cari">⌕</button></div>
+    <div class="nav-actions">
+      <a href="/" class="nav-link">Beranda</a>
+      <a href="/#produk" class="nav-link">Produk</a>
+      <a href="/" class="back">← Marketplace</a>
+    </div>
+  </div>
+</header>
+
+<section class="store-strip">
+  <div class="store-cover"></div>
+  <div class="container">
+    <div id="storeProfile" class="store-profile">
+      <div class="loading" style="width:100%">Memuat toko...</div>
+    </div>
+  </div>
+  <nav class="store-nav">
+    <div class="container store-nav-inner">
+      <button class="tab active" data-tab="all">Produk</button>
+      <button class="tab" data-tab="popular">Terlaris</button>
+      <button class="tab" data-tab="new">Terbaru</button>
+      <button class="tab" data-tab="about">Tentang Toko</button>
+    </div>
+  </nav>
+</section>
+
+<main class="main">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Marketplace</a><span>›</span><span>Toko</span><span>›</span><strong id="crumbName">-</strong></div>
+    <div class="content-layout">
+      <aside class="sidebar">
+        <div class="side-title">Tentang Toko</div>
+        <div id="sideInfo">
+          <div class="side-item">Status <strong>Aktif</strong></div>
+          <div class="side-item">Produk <strong id="sideCount">-</strong></div>
+        </div>
+      </aside>
+      <section class="products-panel" id="productSection">
+        <div class="toolbar">
+          <div class="toolbar-title">Produk Toko <span id="productCount">Memuat produk...</span></div>
+          <select id="sortProducts" class="sort" aria-label="Urutkan produk">
+            <option value="default">Urutkan: Relevan</option>
+            <option value="price-low">Harga terendah</option>
+            <option value="price-high">Harga tertinggi</option>
+            <option value="name">Nama A-Z</option>
+          </select>
+        </div>
+        <div id="products" class="products"></div>
+      </section>
+      <section id="aboutSection" style="display:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:var(--shadow)">
+        <div class="side-title" style="padding:0 0 10px;border:0">Tentang Toko</div>
+        <p id="aboutText" style="margin:0;color:#687b94;font-size:10px;line-height:1.7"></p>
+      </section>
+    </div>
+  </div>
 </main>
+
 <script>
 const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 const rupiah=n=>new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(Number(n||0));
 const slug=new URLSearchParams(location.search).get("slug")||"";
-let products=[];
+let products=[],store=null,activeTab="all";
+
+function filtered(){
+  const q=(document.getElementById("storeSearch").value||"").trim().toLowerCase();
+  let list=products.filter(p=>!q||String(p.name||"").toLowerCase().includes(q));
+  if(activeTab==="new") list=[...list].reverse();
+  const sort=document.getElementById("sortProducts").value;
+  if(sort==="price-low") list.sort((a,b)=>Number(a.price||0)-Number(b.price||0));
+  if(sort==="price-high") list.sort((a,b)=>Number(b.price||0)-Number(a.price||0));
+  if(sort==="name") list.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||""),"id"));
+  return list;
+}
+function renderProducts(){
+  const list=filtered(),root=document.getElementById("products");
+  document.getElementById("productCount").textContent=list.length+" produk";
+  root.innerHTML=list.length?list.map(p=>'<article class="card"><div class="photo"><img loading="lazy" src="'+esc(p.image_url||p.img||"")+'" alt="'+esc(p.name)+'"></div><div class="body"><h3>'+esc(p.name)+'</h3><div class="price">'+rupiah(p.price)+'</div><div class="product-sub">Produk dari '+esc(store?.name||"toko ini")+'</div><button class="btn" onclick="goProduct(\''+encodeURIComponent(p.id||"")+'\')">Lihat Produk</button></div></article>').join(""):'<div class="empty">Produk yang dicari belum tersedia di toko ini.</div>';
+}
 function renderStore(){
-  const store=products.find(p=>p.store?.slug===slug)?.store;
-  const card=document.getElementById("storeCard");
-  if(!store){card.innerHTML='<div class="empty" style="width:100%">Toko tidak ditemukan atau belum memiliki produk aktif.</div>';document.getElementById("products").innerHTML="";return;}
-  const name=store.name||"MarketKita Store", initial=name.trim().charAt(0).toUpperCase()||"M";
-  card.innerHTML='<div class="store-main"><div class="avatar">'+esc(initial)+'</div><div><div class="eyebrow">Official Seller Store</div><h1 class="store-name">'+esc(name)+'</h1><p class="store-desc">'+esc(store.description||"Selamat datang di toko MarketKita.")+'</p><div class="store-meta">@'+esc(store.slug||slug)+' · '+products.length+' produk aktif</div></div></div><a class="back" href="/#produk">Belanja Produk</a>';
-  const root=document.getElementById("products");
-  root.innerHTML=products.length?products.map(p=>'<article class="card"><div class="photo"><img src="'+esc(p.image_url||p.img||"")+'" alt="'+esc(p.name)+'"></div><div class="body"><h3>'+esc(p.name)+'</h3><div class="price">'+rupiah(p.price)+'</div><button class="btn" onclick="goProduct(\''+encodeURIComponent(p.id||"")+'\')">Lihat Produk</button></div></article>').join(""):'<div class="empty" style="grid-column:1/-1">Belum ada produk aktif.</div>';
-  document.getElementById("productCount").textContent=products.length+" produk";
+  const profile=document.getElementById("storeProfile");
+  if(!store){profile.innerHTML='<div class="empty" style="width:100%">Toko tidak ditemukan atau belum memiliki produk aktif.</div>';document.getElementById("products").innerHTML="";return;}
+  const name=store.name||"MarketKita Store",initial=name.trim().charAt(0).toUpperCase()||"M";
+  document.title="MarketKita — "+name;
+  document.getElementById("crumbName").textContent=name;
+  document.getElementById("sideCount").textContent=products.length;
+  document.getElementById("aboutText").textContent=store.description||"Selamat datang di toko MarketKita.";
+  profile.innerHTML='<div class="avatar">'+esc(initial)+'</div><div class="store-copy"><div class="eyebrow">Official Seller Store</div><h1 class="store-name">'+esc(name)+'</h1><p class="store-desc">'+esc(store.description||"Selamat datang di toko MarketKita.")+'</p><div class="store-meta">@'+esc(store.slug||slug)+'</div></div><div class="store-actions"><button class="store-btn" id="followBtn" type="button">♡ Ikuti Toko</button><a class="store-btn primary" href="/#produk">Belanja Produk</a></div><div class="store-stats"><div class="stat"><strong>'+products.length+'</strong>Produk</div><div class="stat"><strong>MarketKita</strong>Marketplace</div></div>';
+  const follow=document.getElementById("followBtn");
+  follow.onclick=()=>{follow.classList.toggle("primary");follow.textContent=follow.classList.contains("primary")?"✓ Mengikuti":"♡ Ikuti Toko"};
+  renderProducts();
 }
 function goProduct(id){location.href="/?store="+encodeURIComponent(slug)+"&from_store=1#produk";}
+document.getElementById("storeSearch").addEventListener("input",renderProducts);
+document.getElementById("sortProducts").addEventListener("change",renderProducts);
+document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");activeTab=btn.dataset.tab;
+  const about=activeTab==="about";
+  document.getElementById("productSection").style.display=about?"none":"block";
+  document.getElementById("aboutSection").style.display=about?"block":"none";
+  if(!about)renderProducts();
+}));
 async function init(){
   try{
     if(!slug)throw new Error("Slug toko tidak ditemukan.");
@@ -53,9 +240,10 @@ async function init(){
     const data=await r.json();
     if(!r.ok||!Array.isArray(data.products))throw new Error(data.error||"Produk tidak tersedia.");
     products=data.products.filter(p=>String(p.store?.slug||"")===slug);
+    store=products.find(p=>p.store)?.store||null;
     renderStore();
   }catch(e){
-    document.getElementById("storeCard").innerHTML='<div class="empty" style="width:100%">Gagal memuat toko: '+esc(e.message||"Terjadi kesalahan.")+'</div>';
+    document.getElementById("storeProfile").innerHTML='<div class="empty" style="width:100%">Gagal memuat toko: '+esc(e.message||"Terjadi kesalahan.")+'</div>';
   }
 }
 init();
