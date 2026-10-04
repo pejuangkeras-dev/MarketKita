@@ -5302,7 +5302,203 @@ html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!impo
   #checkoutModal .kw-co-head p{font-size:11px!important}
   #checkoutModal .kw-co-section{padding:15px!important}
 }
-</style></head>
+</style>
+<style id="marketkita-checkout-reference-final">
+/* FINAL CHECKOUT REFERENCE DESIGN — intentionally overrides all older checkout/modal styles */
+#checkoutModal.kw-checkout-modal{
+  position:fixed!important;
+  top:110px!important;right:0!important;bottom:0!important;left:0!important;
+  width:100vw!important;height:calc(100vh - 110px)!important;
+  display:none!important;align-items:stretch!important;justify-content:stretch!important;
+  padding:0!important;margin:0!important;
+  background:#eef6fd!important;
+  backdrop-filter:none!important;
+  overflow:hidden!important;
+  z-index:2147483000!important;
+}
+#checkoutModal.kw-checkout-modal.show{display:block!important}
+#checkoutModal.kw-checkout-modal>.kw-checkout-box{
+  position:relative!important;
+  inset:auto!important;
+  width:100%!important;height:100%!important;
+  max-width:none!important;max-height:none!important;min-height:0!important;
+  margin:0!important;padding:20px 40px 34px!important;
+  box-sizing:border-box!important;
+  overflow-y:auto!important;overflow-x:hidden!important;
+  border:0!important;border-radius:0!important;
+  background:#eef6fd!important;box-shadow:none!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 430px!important;
+  grid-template-areas:
+    "head head"
+    "address summary"
+    "shipping total"
+    "payment pay"
+    "voucher trust"!important;
+  grid-template-rows:max-content max-content max-content max-content max-content!important;
+  align-content:start!important;align-items:start!important;
+  column-gap:18px!important;row-gap:12px!important;
+}
+#checkoutModal .kw-co-head{
+  grid-area:head!important;
+  position:relative!important;top:auto!important;
+  width:100%!important;min-height:76px!important;
+  margin:0!important;padding:0 46px 13px 0!important;
+  box-sizing:border-box!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  background:transparent!important;border:0!important;border-bottom:1px solid #d6e4f1!important;
+  box-shadow:none!important;z-index:1!important;
+}
+#checkoutModal .kw-co-head>div{display:flex!important;align-items:center!important;gap:12px!important}
+#checkoutModal .kw-co-head>div:before{
+  content:"🔒"!important;width:45px!important;height:45px!important;
+  display:grid!important;place-items:center!important;flex:0 0 45px!important;
+  border-radius:50%!important;background:#fff!important;
+  box-shadow:0 4px 12px rgba(23,105,232,.09)!important;
+}
+#checkoutModal .kw-co-head span{display:block!important;color:#1769e8!important;font-size:8px!important;font-weight:900!important;letter-spacing:.12em!important}
+#checkoutModal .kw-co-head h3{margin:2px 0 4px!important;font-size:29px!important;line-height:1!important;letter-spacing:-.045em!important;color:#081f56!important}
+#checkoutModal .kw-co-head p{margin:0!important;font-size:11px!important;color:#617796!important}
+#checkoutModal .kw-co-head .close-btn{
+  position:absolute!important;right:0!important;top:0!important;
+  width:34px!important;height:34px!important;min-width:34px!important;
+  border-radius:50%!important;background:#e9f1f9!important;
+  border:0!important;color:#5b7089!important;font-size:18px!important;
+}
+#checkoutModal .kw-co-head:after{
+  content:"1  Alamat      →      2  Pengiriman      →      3  Pembayaran      →      4  Selesai"!important;
+  margin-left:auto!important;padding:11px 15px!important;border-radius:10px!important;
+  background:#fff!important;color:#102653!important;
+  font-size:10px!important;font-weight:900!important;white-space:pre!important;
+  box-shadow:0 3px 12px rgba(30,80,130,.05)!important;
+}
+#checkoutModal .kw-co-recipient{display:none!important}
+#checkoutModal .kw-co-section{
+  box-sizing:border-box!important;width:100%!important;
+  margin:0!important;padding:17px 19px!important;
+  background:#fff!important;border:1px solid #d8e5f1!important;
+  border-radius:14px!important;
+  box-shadow:0 4px 14px rgba(35,80,125,.045)!important;
+}
+#checkoutModal .kw-co-recipient + .kw-co-section{grid-area:address!important}
+#checkoutModal .kw-co-shipping{grid-area:shipping!important}
+#checkoutModal .kw-co-payment{grid-area:payment!important}
+#checkoutModal .kw-co-voucher-final{grid-area:voucher!important}
+#checkoutModal .kw-co-title{
+  display:flex!important;align-items:center!important;gap:10px!important;
+  margin:0 0 12px!important;
+}
+#checkoutModal .kw-co-title>b{
+  width:38px!important;height:38px!important;flex:0 0 38px!important;
+  display:grid!important;place-items:center!important;
+  border-radius:50%!important;background:#1769e8!important;color:#fff!important;
+  font-size:15px!important;font-weight:900!important;
+}
+#checkoutModal .kw-co-title strong{display:block!important;color:#081f56!important;font-size:15px!important;font-weight:900!important}
+#checkoutModal .kw-co-title small{display:block!important;margin-top:2px!important;color:#667c98!important;font-size:9px!important}
+#checkoutModal .kw-co-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+#checkoutModal .kw-co-full{grid-column:1/-1!important}
+#checkoutModal .field{margin:0 0 7px!important}
+#checkoutModal .field label{display:block!important;margin:0 0 4px!important;color:#19355b!important;font-size:9px!important;font-weight:850!important}
+#checkoutModal .field input,#checkoutModal .field textarea,#checkoutModal .kw-location-trigger{
+  box-sizing:border-box!important;width:100%!important;
+  border:1px solid #d1dfec!important;border-radius:8px!important;
+  background:#fff!important;color:#17345d!important;font-size:10px!important;
+}
+#checkoutModal .field input{height:39px!important;padding:0 10px!important}
+#checkoutModal .field textarea{height:56px!important;min-height:56px!important;padding:9px 10px!important;resize:none!important}
+#checkoutModal .kw-location-trigger{
+  height:43px!important;min-height:43px!important;padding:0 10px!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  text-align:left!important;
+}
+#checkoutModal .kw-location-trigger b{color:#1769e8!important;font-size:16px!important}
+#checkoutModal .kw-address-attribution{font-size:7px!important}
+#checkoutModal .kw-co-shipping .checkout-summary-row{
+  margin:0 0 8px!important;padding:10px 11px!important;
+  display:flex!important;justify-content:space-between!important;
+  border:1px solid #d9e6f2!important;border-radius:8px!important;
+  background:#f4f9ff!important;color:#5e7592!important;font-size:9px!important;
+}
+#checkoutModal .checkout-shipping-options{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important;
+}
+#checkoutModal .checkout-shipping-empty{
+  grid-column:1/-1!important;padding:12px!important;
+  border:1px dashed #c9dbea!important;border-radius:8px!important;
+  background:#fbfdff!important;color:#8394aa!important;font-size:8px!important;text-align:center!important;
+}
+#checkoutModal .kw-co-items{
+  grid-area:summary!important;
+  box-sizing:border-box!important;width:100%!important;
+  margin:0!important;padding:0!important;align-self:start!important;
+  background:#fff!important;border:1px solid #d8e5f1!important;
+  border-radius:14px!important;overflow:hidden!important;
+  box-shadow:0 4px 14px rgba(35,80,125,.045)!important;
+}
+#checkoutModal .kw-co-items:before{
+  content:"Ringkasan Pesanan"!important;display:block!important;
+  padding:18px 19px 14px!important;
+  border-bottom:1px solid #e6eef6!important;
+  color:#081f56!important;font-size:18px!important;font-weight:900!important;
+}
+#checkoutModal .kw-co-items .checkout-summary-row{
+  margin:0!important;padding:12px 19px!important;
+  display:flex!important;justify-content:space-between!important;gap:10px!important;
+  border:0!important;border-bottom:1px solid #edf2f7!important;
+  background:#fff!important;color:#263f61!important;font-size:9px!important;
+}
+#checkoutModal .kw-co-total{
+  grid-area:total!important;align-self:start!important;
+  box-sizing:border-box!important;width:100%!important;
+  margin:0!important;padding:16px 19px!important;
+  display:flex!important;justify-content:space-between!important;align-items:center!important;
+  background:#fff!important;border:1px solid #d8e5f1!important;border-radius:12px!important;
+}
+#checkoutModal .kw-co-total span{font-size:13px!important;font-weight:850!important;color:#19355b!important}
+#checkoutModal .kw-co-total strong{font-size:22px!important;color:#0878f9!important}
+#checkoutModal .kw-co-pay{
+  grid-area:pay!important;align-self:start!important;
+  width:100%!important;height:48px!important;margin:0!important;
+  border:0!important;border-radius:9px!important;
+  background:#0878f9!important;color:#fff!important;
+  font-size:13px!important;font-weight:900!important;
+  box-shadow:0 7px 18px rgba(8,120,249,.18)!important;
+}
+#checkoutModal .mk-checkout-trust{
+  grid-area:trust!important;align-self:start!important;
+  box-sizing:border-box!important;width:100%!important;
+  margin:0!important;padding:12px 14px!important;
+  background:#fff!important;border:1px solid #d8e5f1!important;border-radius:12px!important;
+  box-shadow:0 4px 14px rgba(35,80,125,.045)!important;
+}
+#checkoutModal .mk-trust-head{padding:10px!important;border-radius:9px!important;background:#f2f8ff!important}
+#checkoutModal .mk-trust-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:11px 9px!important;padding:11px 3px 2px!important}
+#checkoutModal .mk-trust-grid>div{display:flex!important;gap:7px!important;align-items:flex-start!important}
+#checkoutModal .mk-trust-grid>div>b{width:25px!important;height:25px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:#edf6ff!important;color:#1769e8!important;flex:0 0 25px!important}
+#checkoutModal .mk-trust-grid strong{display:block!important;font-size:8px!important;color:#19355b!important}
+#checkoutModal .mk-trust-grid small{display:block!important;margin-top:2px!important;font-size:7px!important;color:#71859f!important}
+#checkoutModal .kw-co-voucher-final .kw-co-title{margin-bottom:9px!important}
+#checkoutModal .kw-voucher{display:grid!important;grid-template-columns:1fr auto!important;gap:8px!important}
+#checkoutModal .kw-voucher input{height:39px!important;box-sizing:border-box!important;border:1px solid #d1dfec!important;border-radius:8px!important;padding:0 10px!important}
+#checkoutModal .kw-voucher .smallbtn{height:39px!important;min-width:92px!important;border:0!important;border-radius:8px!important;background:#1769e8!important;color:#fff!important}
+@media(max-width:1050px){
+  #checkoutModal.kw-checkout-modal>.kw-checkout-box{grid-template-columns:minmax(0,1fr) 350px!important;padding-left:22px!important;padding-right:22px!important}
+  #checkoutModal .checkout-shipping-options{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:800px){
+  #checkoutModal.kw-checkout-modal{top:0!important;height:100vh!important}
+  #checkoutModal.kw-checkout-modal>.kw-checkout-box{
+    display:flex!important;flex-direction:column!important;
+    gap:10px!important;padding:14px!important;overflow-y:auto!important;
+  }
+  #checkoutModal .kw-co-head{min-height:68px!important}
+  #checkoutModal .kw-co-head:after{display:none!important}
+  #checkoutModal .kw-co-section,#checkoutModal .kw-co-items,#checkoutModal .kw-co-total,#checkoutModal .kw-co-pay,#checkoutModal .mk-checkout-trust{width:100%!important}
+  #checkoutModal .kw-co-grid,#checkoutModal .checkout-shipping-options,#checkoutModal .mk-payment-grid,#checkoutModal .mk-trust-grid{grid-template-columns:1fr!important}
+}
+</style>
+</head>
 
 <body>
 <div class="mk2-top"><div class="container"><span>🚚 Gratis ongkir minimal pembelian Rp 200.000</span><span>Diskon 10% untuk pembelian pertama</span><span>Aman • Cepat • Terpercaya</span></div></div>
