@@ -5,7 +5,12 @@ const ROUTES={
   "/api/address-suggestions":{limit:30,window:60,label:"address"},
   "/api/shipping-quote":{limit:20,window:60,label:"shipping"},
   "/api/create-transaction":{limit:10,window:60,label:"checkout"},
-  "/api/analytics":{limit:120,window:60,label:"analytics"}
+  "/api/analytics":{limit:120,window:60,label:"analytics"},
+  "/api/midtrans-notification":{limit:60,window:60,label:"midtrans-webhook"},
+  "/api/shipping-webhook":{limit:60,window:60,label:"shipping-webhook"},
+  "/api/rajaongkir-webhook":{limit:60,window:60,label:"rajaongkir-webhook"},
+  "/api/shipping-create":{limit:20,window:60,label:"shipping-create"},
+  "/api/midtrans-reconcile":{limit:20,window:60,label:"midtrans-reconcile"}
 };
 
 function routeConfig(path){
@@ -79,6 +84,10 @@ export async function onRequest(context){
       });
     }
     const response=await context.next();
+    response.headers.set("X-Content-Type-Options","nosniff");
+    response.headers.set("Referrer-Policy","strict-origin-when-cross-origin");
+    response.headers.set("Permissions-Policy","camera=(), microphone=(), geolocation=()");
+    response.headers.set("X-Frame-Options","SAMEORIGIN");
     response.headers.set("X-RateLimit-Limit",String(config.limit));
     response.headers.set("X-RateLimit-Remaining",String(result.remaining));
     response.headers.set("X-RateLimit-Reset",String(Math.ceil(result.resetAt/1000)));
