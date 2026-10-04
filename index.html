@@ -5056,6 +5056,102 @@ window.selectCheckoutPayment=function(btn){
  .p2-store-link{width:100%}
 }
 </style>
+<style id="marketkita-p3-checkout">
+/* P3 — Final marketplace checkout */
+#checkoutModal .kw-checkout-box{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 310px!important;
+  grid-template-rows:auto auto auto auto auto auto auto!important;
+  column-gap:12px!important;
+  align-content:start!important;
+}
+#checkoutModal .kw-co-head,
+#checkoutModal .kw-co-items{grid-column:1/-1!important}
+#checkoutModal .kw-co-head{grid-row:1!important}
+#checkoutModal .kw-co-items{grid-row:2!important}
+#checkoutModal .kw-co-recipient{grid-column:1!important;grid-row:3!important}
+#checkoutModal .kw-co-recipient + .kw-co-section{grid-column:1!important;grid-row:4!important}
+#checkoutModal .kw-co-shipping{grid-column:1!important;grid-row:5!important}
+#checkoutModal .kw-co-payment{grid-column:1!important;grid-row:6!important}
+#checkoutModal .kw-co-voucher-final{grid-column:1!important;grid-row:7!important}
+#checkoutModal .kw-co-total,
+#checkoutModal .kw-co-pay,
+#checkoutModal .mk-checkout-trust{
+  grid-column:2!important;
+  position:sticky!important;
+  z-index:5!important;
+}
+#checkoutModal .kw-co-total{grid-row:3!important;top:68px!important;margin:10px 18px 0 4px!important}
+#checkoutModal .kw-co-pay{grid-row:4!important;top:133px!important;width:calc(100% - 22px)!important;margin:10px 18px 0 4px!important}
+#checkoutModal .mk-checkout-trust{
+  grid-row:5 / span 3!important;
+  top:190px!important;
+  align-self:start!important;
+  margin:10px 18px 18px 4px!important;
+}
+#checkoutModal .p3-order-store{
+  border:1px solid #dce7f3;border-radius:10px;background:#fff;overflow:hidden;
+}
+#checkoutModal .p3-order-store + .p3-order-store{margin-top:8px}
+#checkoutModal .p3-order-store-head{
+  display:flex;align-items:center;gap:7px;padding:9px 11px;background:#f7fbff;border-bottom:1px solid #e3ecf5;
+}
+#checkoutModal .p3-order-store-head strong{font-size:9px;color:#17345c!important}
+#checkoutModal .p3-order-store-head small{margin-left:auto;color:#8a99aa;font-size:7px}
+#checkoutModal .p3-order-store .checkout-summary-row{
+  margin:0!important;border:0!important;border-bottom:1px solid #edf2f7!important;border-radius:0!important;background:#fff!important;
+}
+#checkoutModal .p3-order-store .checkout-summary-row:last-child{border-bottom:0!important}
+#checkoutModal .kw-co-section{min-width:0}
+#checkoutModal .mk-payment-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+#checkoutModal .mk-payment-option{
+  min-height:62px!important;padding:9px!important;border:1px solid #dbe6f1!important;border-radius:9px!important;
+  background:#fff!important;color:#51657f!important;display:flex!important;align-items:center!important;gap:8px!important;
+  text-align:left!important;cursor:pointer!important;transition:.15s!important;
+}
+#checkoutModal .mk-payment-option.active{
+  border-color:#1769e8!important;background:#eef6ff!important;box-shadow:0 0 0 2px rgba(23,105,232,.08)!important;
+}
+#checkoutModal .mk-payment-option strong{display:block!important;font-size:9px!important;color:#17345c!important}
+#checkoutModal .mk-payment-option small{display:block!important;font-size:7px!important;color:#8494a8!important;margin-top:2px}
+#checkoutModal .mk-payment-option .mk-pay-icon{width:27px;height:27px;border-radius:7px;background:#eaf3ff;color:#1769e8;display:grid;place-items:center;font-weight:900}
+#checkoutModal .mk-payment-option i{margin-left:auto;font-style:normal;color:#1769e8}
+#checkoutModal .mk-checkout-trust{background:#fff;border:1px solid #dce7f3;border-radius:12px;padding:12px}
+#checkoutModal .mk-checkout-trust .mk-trust-head{display:flex;gap:7px;align-items:center;padding-bottom:9px;border-bottom:1px solid #edf2f7}
+#checkoutModal .mk-checkout-trust .mk-trust-head strong{font-size:9px!important}
+#checkoutModal .mk-trust-grid{display:grid!important;grid-template-columns:1fr!important;gap:8px!important;padding-top:9px}
+#checkoutModal .mk-trust-grid>div{display:flex!important;gap:7px!important;align-items:flex-start!important}
+#checkoutModal .mk-trust-grid b{font-size:13px!important;color:#1769e8!important}
+#checkoutModal .mk-trust-grid strong{display:block!important;font-size:8px!important}
+#checkoutModal .mk-trust-grid small{display:block!important;font-size:7px!important;color:#8595a8!important;margin-top:2px}
+#checkoutModal .kw-co-total span{font-size:9px!important}
+#checkoutModal .kw-co-total strong{font-size:17px!important}
+#checkoutModal .kw-co-pay{height:48px!important;font-size:10px!important}
+#checkoutModal .kw-location-dialog{z-index:260!important}
+@media(max-width:900px){
+  #checkoutModal .kw-checkout-box{grid-template-columns:1fr!important;display:block!important}
+  #checkoutModal .kw-co-head,#checkoutModal .kw-co-items,#checkoutModal .kw-co-section,
+  #checkoutModal .kw-co-total,#checkoutModal .kw-co-pay,#checkoutModal .mk-checkout-trust{
+    grid-column:auto!important;grid-row:auto!important;position:static!important;
+  }
+  #checkoutModal .kw-co-total{margin:12px 18px 0!important}
+  #checkoutModal .kw-co-pay{width:calc(100% - 36px)!important;margin:10px 18px 18px!important}
+  #checkoutModal .mk-checkout-trust{margin:10px 18px 18px!important}
+}
+@media(max-width:560px){
+  #checkoutModal{padding:0!important;align-items:stretch!important}
+  #checkoutModal .kw-checkout-box{width:100%!important;max-height:100vh!important;height:100vh!important;border-radius:0!important}
+  #checkoutModal .kw-co-head{padding:14px!important}
+  #checkoutModal .kw-co-items,#checkoutModal .kw-co-section{margin:8px 10px!important}
+  #checkoutModal .kw-co-total{margin:10px!important}
+  #checkoutModal .kw-co-pay{width:calc(100% - 20px)!important;margin:9px 10px 12px!important}
+  #checkoutModal .mk-checkout-trust{margin:9px 10px 15px!important}
+  #checkoutModal .kw-co-grid{grid-template-columns:1fr!important}
+  #checkoutModal .mk-payment-grid{grid-template-columns:1fr!important}
+  #checkoutModal .checkout-shipping-options{grid-template-columns:1fr!important}
+  #checkoutModal .p3-order-store-head{padding:8px 9px}
+}
+</style>
 </head>
 
 <body>
@@ -7646,20 +7742,33 @@ function openCheckout(){
     return;
   }
 
-  document.getElementById("checkoutItems").innerHTML=cart.map(x=>`
-    <div class="checkout-summary-row">
-      <span>
-        ${x.name}<br>
-        <small>${t("size_label")} ${x.size} · Qty ${x.quantity}</small>
-      </span>
-      <span>${rupiah(x.price*x.quantity)}</span>
-    </div>
-  `).join("");
+  const checkoutGroups=new Map();
+  cart.forEach(x=>{
+    const product=products?.[x.productIndex]||{};
+    const storeId=String(x.store_id||product.store_id||"unknown");
+    const storeName=String(product.store?.name||x.store_name||"Toko MarketKita");
+    if(!checkoutGroups.has(storeId))checkoutGroups.set(storeId,{storeId,storeName,items:[]});
+    checkoutGroups.get(storeId).items.push(x);
+  });
+  document.getElementById("checkoutItems").innerHTML=[...checkoutGroups.values()].map(group=>`
+    <div class="p3-order-store">
+      <div class="p3-order-store-head"><span>🏪</span><strong>${escDetail(group.storeName)}</strong><small>${group.items.length} produk</small></div>
+      ${group.items.map(x=>`
+        <div class="checkout-summary-row">
+          <span><strong>${escDetail(x.name)}</strong><br><small>${x.size?escDetail(t("size_label")+" "+x.size)+" · ":""}Qty ${Number(x.quantity)||1}</small></span>
+          <strong>${rupiah(x.price*x.quantity)}</strong>
+        </div>`).join("")}
+    </div>`).join("");
 
   window.marketCheckoutVoucherId=null;
   window.marketCheckoutShippingQuoteId=null;
   window.marketCheckoutShippingSelections=[];
   window.marketCheckoutShippingFee=0;
+  window.checkoutPaymentMethod="bank";
+  document.querySelectorAll("#checkoutModal .mk-payment-option").forEach((el,i)=>{
+    el.classList.toggle("active",i===0);
+    const dot=el.querySelector("i");if(dot)dot.textContent=i===0?"●":"○";
+  });
   window.marketCheckoutIdempotencyKey=crypto.randomUUID();
   kwShippingCalcKey="";
   kwShippingCalcPromise=null;
@@ -7790,7 +7899,7 @@ async function startPayment(e){
       district:document.getElementById("buyerManualDistrict").value.trim(),
       subdistrict:document.getElementById("buyerManualSubdistrict").value.trim(),
       postal_code:document.getElementById("buyerManualPostalCode").value.trim(),
-      destination_id:String(picker.subdistrict?.id||"").trim()
+      destination_id:String((window.kwLocationPicker||kwLocationPicker).subdistrict?.id||"").trim()
     }:null;
     const payload={
       address_id:addressId||null,
@@ -7814,7 +7923,8 @@ async function startPayment(e){
         quantity:x.quantity
       })),
       voucher_id:window.marketCheckoutVoucherId || null,
-      promotion_campaign_ids:Array.isArray(window.marketPromotionCampaignIds)?window.marketPromotionCampaignIds:[]
+      promotion_campaign_ids:Array.isArray(window.marketPromotionCampaignIds)?window.marketPromotionCampaignIds:[],
+      payment_method:String(window.checkoutPaymentMethod||"bank")
     };
 
     const checkoutIdempotencyKey=String(window.marketCheckoutIdempotencyKey||crypto.randomUUID());
