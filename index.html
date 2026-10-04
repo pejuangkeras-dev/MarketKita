@@ -5124,7 +5124,185 @@ window.selectCheckoutPayment=function(btn){
  btn.classList.add("active");const i=btn.querySelector("i");if(i)i.textContent="●";
  window.checkoutPaymentMethod=btn.dataset.payment||"bank";
 };
-</script></head>
+</script><style id="marketkita-checkout-reference-20261004">
+/* Checkout reference implementation — matches the supplied 1536px MarketKita checkout while preserving existing IDs/functions. */
+html:has(#checkoutModal.show),body:has(#checkoutModal.show){overflow:hidden!important}
+#checkoutModal.kw-checkout-modal{
+  position:fixed!important;left:0!important;right:0!important;top:110px!important;bottom:0!important;
+  width:100vw!important;height:calc(100dvh - 110px)!important;z-index:2147483000!important;
+  display:none!important;align-items:flex-start!important;justify-content:stretch!important;
+  padding:0!important;overflow-y:auto!important;overflow-x:hidden!important;
+  background:#eef6fd!important;backdrop-filter:none!important;
+}
+#checkoutModal.kw-checkout-modal.show{display:block!important}
+#checkoutModal .kw-checkout-box{
+  position:relative!important;width:100%!important;max-width:none!important;min-height:100%!important;
+  margin:0!important;padding:20px 40px 44px!important;border:0!important;border-radius:0!important;
+  background:#eef6fd!important;box-shadow:none!important;color:#132a52!important;
+  display:grid!important;grid-template-columns:minmax(0,2.05fr) minmax(380px,.98fr)!important;
+  grid-template-rows:auto auto auto auto auto auto!important;column-gap:18px!important;align-content:start!important;
+  overflow:visible!important;
+}
+#checkoutModal .kw-co-head{
+  grid-column:1/-1!important;grid-row:1!important;position:relative!important;top:auto!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  min-height:76px!important;padding:0 4px 18px!important;background:transparent!important;border:0!important;
+}
+#checkoutModal .kw-co-head>div{display:flex!important;align-items:center!important;gap:14px!important}
+#checkoutModal .kw-co-head>div:before{
+  content:"▣"!important;width:48px!important;height:48px!important;border-radius:50%!important;
+  display:grid!important;place-items:center!important;background:#fff!important;color:#1769e8!important;font-size:22px!important;
+  box-shadow:0 5px 15px rgba(23,105,232,.08)!important;
+}
+#checkoutModal .kw-co-head>div>span{display:none!important}
+#checkoutModal .kw-co-head h3{margin:0 0 3px!important;font-size:31px!important;line-height:1!important;letter-spacing:-.04em!important;color:#0a2054!important}
+#checkoutModal .kw-co-head p{margin:0!important;font-size:13px!important;color:#617796!important}
+#checkoutModal .kw-co-head:after{
+  content:"1  Alamat                 2  Pengiriman                 3  Pembayaran                 4  Selesai"!important;
+  position:static!important;margin-left:auto!important;padding:13px 22px!important;border-radius:12px!important;
+  background:#fff!important;color:#132653!important;font-size:12px!important;font-weight:800!important;
+  white-space:pre!important;box-shadow:0 4px 15px rgba(40,90,135,.05)!important;
+}
+#checkoutModal .kw-co-head .close-btn{
+  position:absolute!important;right:0!important;top:-2px!important;width:32px!important;height:32px!important;
+  border-radius:50%!important;z-index:5!important;background:#fff!important;color:#35506f!important;
+}
+#checkoutModal .kw-co-recipient{display:none!important}
+#checkoutModal .kw-co-section{
+  grid-column:1!important;margin:0 0 14px!important;padding:18px 20px!important;
+  background:#fff!important;border:1px solid #dce8f4!important;border-radius:15px!important;
+  box-shadow:0 5px 18px rgba(32,78,120,.045)!important;
+}
+#checkoutModal .kw-co-section:nth-of-type(2){grid-row:2!important}
+#checkoutModal .kw-co-shipping{grid-row:3!important}
+#checkoutModal .kw-co-payment{grid-row:4!important}
+#checkoutModal .kw-co-voucher-final{grid-row:5!important}
+#checkoutModal .kw-co-title{display:flex!important;align-items:center!important;gap:11px!important;margin-bottom:14px!important}
+#checkoutModal .kw-co-title>b{
+  width:38px!important;height:38px!important;flex:0 0 38px!important;border-radius:50%!important;
+  display:grid!important;place-items:center!important;background:#1769e8!important;color:#fff!important;
+  font-size:16px!important;box-shadow:0 4px 12px rgba(23,105,232,.18)!important;
+}
+#checkoutModal .kw-co-title strong{display:block!important;font-size:16px!important;color:#0a2358!important}
+#checkoutModal .kw-co-title small{display:block!important;margin-top:2px!important;font-size:10px!important;color:#7185a0!important}
+#checkoutModal .kw-co-section label{display:block!important;margin:0 0 5px!important;font-size:10px!important;font-weight:800!important;color:#1b355c!important}
+#checkoutModal .kw-co-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
+#checkoutModal .kw-co-full{grid-column:1/-1!important}
+#checkoutModal .kw-co-section input,#checkoutModal .kw-co-section textarea,#checkoutModal .kw-co-section select,#checkoutModal .kw-location-trigger{
+  width:100%!important;box-sizing:border-box!important;border:1px solid #d2e0ee!important;border-radius:9px!important;
+  background:#fff!important;color:#17345d!important;font-size:11px!important;
+}
+#checkoutModal .kw-co-section input{height:43px!important;padding:0 11px!important}
+#checkoutModal .kw-co-section textarea{height:64px!important;padding:10px 11px!important;resize:none!important}
+#checkoutModal .kw-location-trigger{
+  min-height:48px!important;height:48px!important;padding:0 12px!important;display:flex!important;
+  align-items:center!important;justify-content:space-between!important;text-align:left!important;
+}
+#checkoutModal .kw-location-trigger b{color:#1769e8!important;font-size:20px!important}
+#checkoutModal .kw-co-summary-field{margin-top:10px!important}
+#checkoutModal .kw-co-shipping .checkout-summary-row{
+  margin:0 0 10px!important;padding:10px 12px!important;border:1px solid #dce8f4!important;
+  border-radius:9px!important;background:#f4f9ff!important;color:#607594!important;font-size:10px!important;
+}
+#checkoutModal .kw-co-shipping .checkout-summary-row strong{color:#1769e8!important}
+#checkoutModal .checkout-shipping-options{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important;
+}
+#checkoutModal .checkout-shipping-option{
+  min-height:78px!important;padding:10px!important;border:1px solid #d5e2ef!important;
+  border-radius:10px!important;background:#fff!important;
+}
+#checkoutModal .checkout-shipping-empty{
+  grid-column:1/-1!important;padding:13px!important;border:1px dashed #cbdceb!important;
+  border-radius:9px!important;background:#fbfdff!important;color:#8294aa!important;font-size:9px!important;text-align:center!important;
+}
+#checkoutModal .mk-payment-grid{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:9px!important;
+}
+#checkoutModal .mk-payment-option{
+  min-height:76px!important;border:1px solid #d5e2ef!important;border-radius:10px!important;
+  background:#fff!important;padding:10px!important;display:grid!important;
+  grid-template-columns:34px 1fr 15px!important;gap:8px!important;align-items:center!important;
+  text-align:left!important;color:#122954!important;cursor:pointer!important;
+}
+#checkoutModal .mk-payment-option.active{border-color:#1769e8!important;box-shadow:inset 0 0 0 1px #1769e8!important;background:#f5faff!important}
+#checkoutModal .mk-pay-icon{width:32px!important;height:32px!important;border-radius:9px!important;background:#eaf4ff!important;color:#1769e8!important;display:grid!important;place-items:center!important;font-weight:900!important}
+#checkoutModal .mk-payment-option strong{display:block!important;font-size:10px!important;color:#132953!important}
+#checkoutModal .mk-payment-option small{display:block!important;color:#7388a2!important;font-size:8px!important;margin-top:3px!important;line-height:1.35!important}
+#checkoutModal .mk-payment-option i{font-style:normal!important;color:#1769e8!important;font-size:15px!important}
+#checkoutModal .kw-co-voucher-final{
+  padding:14px 16px!important;margin-bottom:0!important;
+}
+#checkoutModal .kw-co-voucher-final .kw-co-title{margin-bottom:8px!important}
+#checkoutModal .kw-co-voucher-final .kw-co-title>b{width:28px!important;height:28px!important;flex-basis:28px!important;font-size:12px!important}
+#checkoutModal .kw-co-voucher-final .kw-co-title strong{font-size:12px!important}
+#checkoutModal .kw-co-voucher-final .kw-co-title small{font-size:8px!important}
+#checkoutModal .kw-voucher{display:grid!important;grid-template-columns:1fr auto!important;gap:7px!important}
+#checkoutModal .kw-voucher input{height:40px!important;border:1px solid #d2e0ee!important;border-radius:8px!important;padding:0 10px!important}
+#checkoutModal .kw-voucher button{min-width:90px!important;height:40px!important;background:#1769e8!important;color:#fff!important;border:0!important;border-radius:8px!important}
+#checkoutModal .kw-co-items{
+  grid-column:2!important;grid-row:2!important;align-self:start!important;margin:0 0 14px!important;
+  padding:0!important;background:#fff!important;border:1px solid #dce8f4!important;border-radius:15px!important;
+  box-shadow:0 5px 18px rgba(32,78,120,.045)!important;overflow:hidden!important;
+}
+#checkoutModal .kw-co-items:before{
+  content:"Ringkasan Pesanan";display:block;padding:20px 20px 15px;color:#0a2358;font-size:19px;font-weight:900;border-bottom:1px solid #e7eef6;
+}
+#checkoutModal .kw-co-items:after{
+  content:"";display:block;height:1px;background:#edf2f7;
+}
+#checkoutModal .kw-co-items .checkout-summary-row{
+  margin:0!important;padding:14px 20px!important;border:0!important;border-bottom:1px solid #edf2f7!important;
+  background:#fff!important;color:#1b355c!important;font-size:11px!important;display:flex!important;justify-content:space-between!important;gap:12px!important;
+}
+#checkoutModal .kw-co-items .checkout-summary-row:last-child{border-bottom:0!important}
+#checkoutModal .kw-co-total{
+  grid-column:2!important;grid-row:3!important;align-self:start!important;margin:0 0 10px!important;
+  padding:18px 20px!important;background:#fff!important;border:1px solid #dce8f4!important;border-radius:14px!important;
+  display:flex!important;justify-content:space-between!important;align-items:center!important;
+}
+#checkoutModal .kw-co-total span{font-size:14px!important;font-weight:800!important;color:#1b355c!important}
+#checkoutModal .kw-co-total strong{font-size:25px!important;color:#1769e8!important}
+#checkoutModal .kw-co-pay{
+  grid-column:2!important;grid-row:4!important;width:100%!important;height:48px!important;margin:0 0 12px!important;
+  border:0!important;border-radius:10px!important;background:#1769e8!important;color:#fff!important;
+  font-size:14px!important;font-weight:900!important;box-shadow:0 8px 20px rgba(23,105,232,.18)!important;
+}
+#checkoutModal .kw-co-pay:before{content:"🔒  "!important;font-size:12px!important}
+#checkoutModal .mk-checkout-trust{
+  grid-column:2!important;grid-row:5 / span 2!important;align-self:start!important;
+  background:#fff!important;border:1px solid #dce8f4!important;border-radius:14px!important;padding:14px 16px!important;
+}
+#checkoutModal .mk-trust-head{display:flex!important;align-items:center!important;gap:10px!important;padding:10px!important;background:#f3f8fe!important;border-radius:10px!important}
+#checkoutModal .mk-trust-head>b{width:32px!important;height:32px!important;border-radius:9px!important;background:#e5f1ff!important;color:#1769e8!important;display:grid!important;place-items:center!important}
+#checkoutModal .mk-trust-head strong{font-size:14px!important;color:#102858!important}
+#checkoutModal .mk-trust-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:13px 10px!important;padding:14px 4px 2px!important}
+#checkoutModal .mk-trust-grid>div{display:flex!important;gap:9px!important;align-items:flex-start!important}
+#checkoutModal .mk-trust-grid>div>b{width:34px!important;height:34px!important;flex:0 0 34px!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:#edf6ff!important;color:#1769e8!important}
+#checkoutModal .mk-trust-grid span strong{display:block!important;font-size:10px!important;color:#19345c!important}
+#checkoutModal .mk-trust-grid span small{display:block!important;margin-top:3px!important;font-size:8px!important;color:#7387a0!important;line-height:1.35!important}
+@media(max-width:1100px){
+  #checkoutModal .kw-checkout-box{grid-template-columns:minmax(0,1.5fr) minmax(320px,.85fr)!important;padding:18px 24px 36px!important}
+  #checkoutModal .kw-co-head:after{font-size:10px!important;word-spacing:5px!important}
+  #checkoutModal .checkout-shipping-options,#checkoutModal .mk-payment-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:820px){
+  #checkoutModal.kw-checkout-modal{top:0!important;height:100dvh!important}
+  #checkoutModal .kw-checkout-box{display:block!important;padding:14px 14px 28px!important}
+  #checkoutModal .kw-co-head{min-height:78px!important;padding-right:42px!important}
+  #checkoutModal .kw-co-head:after{display:none!important}
+  #checkoutModal .kw-co-section,#checkoutModal .kw-co-items,#checkoutModal .kw-co-total,#checkoutModal .kw-co-pay,#checkoutModal .mk-checkout-trust{width:100%!important;margin-left:0!important;margin-right:0!important}
+  #checkoutModal .kw-co-items{margin-bottom:14px!important}
+  #checkoutModal .kw-co-total,#checkoutModal .kw-co-pay,#checkoutModal .mk-checkout-trust{margin-bottom:12px!important}
+}
+@media(max-width:560px){
+  #checkoutModal .kw-co-grid{grid-template-columns:1fr!important}
+  #checkoutModal .checkout-shipping-options,#checkoutModal .mk-payment-grid,#checkoutModal .mk-trust-grid{grid-template-columns:1fr!important}
+  #checkoutModal .kw-co-head h3{font-size:25px!important}
+  #checkoutModal .kw-co-head p{font-size:11px!important}
+  #checkoutModal .kw-co-section{padding:15px!important}
+}
+</style></head>
 
 <body>
 <div class="mk2-top"><div class="container"><span>🚚 Gratis ongkir minimal pembelian Rp 200.000</span><span>Diskon 10% untuk pembelian pertama</span><span>Aman • Cepat • Terpercaya</span></div></div>
@@ -5415,8 +5593,17 @@ window.selectCheckoutPayment=function(btn){
   <div id="checkoutVoucherMessage" class="kw-voucher-msg"></div><div id="checkoutPromotionSummary" class="mk-g4-promo"></div>
 </section>
 
-    <div class="kw-co-total"><span>Total pembayaran</span><strong id="checkoutTotal">Rp0</strong></div>
-    <button id="payButton" class="pay-btn kw-co-pay" type="button" onclick="startPayment(event)" data-i18n="pay_button">Lanjut ke Pembayaran</button>
+    <div class="kw-co-total"><span>Total Pembayaran</span><strong id="checkoutTotal">Rp0</strong></div>
+    <button id="payButton" class="pay-btn kw-co-pay" type="button" onclick="startPayment(event)" data-i18n="pay_button">Bayar Sekarang</button>
+    <div class="mk-checkout-trust" aria-label="Keamanan belanja MarketKita">
+      <div class="mk-trust-head"><b>♜</b><strong>Belanja di MarketKita Lebih Aman</strong></div>
+      <div class="mk-trust-grid">
+        <div><b>♙</b><span><strong>Transaksi Aman</strong><small>Data Anda terenkripsi</small></span></div>
+        <div><b>▣</b><span><strong>Pengiriman Terpercaya</strong><small>Bekerja sama dengan ekspedisi resmi</small></span></div>
+        <div><b>◈</b><span><strong>Proteksi Pembeli</strong><small>Dapatkan pengembalian dana</small></span></div>
+        <div><b>♙</b><span><strong>Layanan Customer Service</strong><small>Siap membantu 24/7</small></span></div>
+      </div>
+    </div>
   </div>
 </div>
 
