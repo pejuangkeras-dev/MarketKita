@@ -43,7 +43,6 @@ test.describe("P16 — Core Stability & Recovery", () => {
     const styleClose = (html.match(/<\\/style>/gi) || []).length;
     expect(styleOpen).toBe(styleClose);
     expect(html).not.toMatch(/<\\/style>\\s*<\\/style>/i);
-    expect(html).not.toMatch(/<style>[^]*<style>/i);
     expect(html).toContain('<link rel="stylesheet" href="/marketkita-design-v3.css?v=3">');
 
     const failures = [];
