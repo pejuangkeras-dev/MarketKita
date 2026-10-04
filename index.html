@@ -535,6 +535,13 @@ body{background:#f5f8fc!important;color:#24344d!important}
 </style>
 </style>
 
+<style id="marketkita-p8-customer-profile">
+.profile-select{width:100%;height:44px;border:1px solid #d9d3ca;border-radius:10px;background:#fff;padding:0 13px;font-size:13px;color:#171817;outline:none}.profile-select:focus{border-color:#171817;box-shadow:0 0 0 3px rgba(23,24,23,.06)}
+.profile-form .profile-row input[type=date]{color:#171817}
+.account-profile-head{align-items:center!important}.account-safe-badge{display:flex;align-items:center;gap:9px;padding:10px 13px;border:1px solid #dce5f1;border-radius:12px;background:#f8fbff}.account-safe-badge span{font-size:16px;color:#1769e8}.account-safe-badge strong{display:block;font-size:10px}.account-safe-badge small{display:block;color:#718096;font-size:9px;margin-top:2px}
+.account-security-row{width:100%;display:flex;align-items:center;gap:10px;border:1px solid #e4eaf1;background:#fff;border-radius:10px;padding:11px 12px;margin-top:7px;text-align:left;color:#24344a}.account-security-row span{width:28px;height:28px;border-radius:8px;background:#edf4fd;display:grid;place-items:center}.account-security-row strong{font-size:11px;flex:1}.account-security-row b{font-size:18px;color:#91a0b3}
+@media(max-width:650px){.account-profile-head{align-items:flex-start!important;flex-direction:column}.account-safe-badge{width:100%}}
+</style>
 <style id="marketkita-p7-order-tracking">
 .order-filter-row{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}.order-filter{border:1px solid #dce5f1;background:#fff;color:#56667c;border-radius:999px;padding:8px 12px;font-size:10px;font-weight:800}.order-filter.active{background:#171817;color:#fff;border-color:#171817}.buyer-seller-track-list{display:grid;gap:8px;margin-top:10px}.buyer-seller-track-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border:1px solid #dce5f1;border-radius:10px;background:#f8fbff}.buyer-seller-track-row>div{min-width:0;display:flex;flex-direction:column;gap:3px}.buyer-seller-track-row strong{font-size:10px}.buyer-seller-track-row span{font-size:9px;color:#66758c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.buyer-seller-track-row button{border:0;background:#1769e8;color:#fff;border-radius:8px;padding:7px 10px;font-size:9px;font-weight:900;flex:none}.mk-track-box{width:min(620px,100%)!important}.mk-track-summary{border:1px solid #dce5f1}.mk-track-event{position:relative;padding-left:16px}.mk-track-event:before{content:"";position:absolute;left:0;top:15px;width:7px;height:7px;border-radius:50%;background:#1769e8}.mk-track-event strong{font-size:11px}.mk-track-event div{font-size:10px;color:#475d78;margin-top:3px;line-height:1.45}@media(max-width:600px){.buyer-seller-track-row{align-items:flex-start}.order-filter{padding:7px 10px}}
 </style>
@@ -5775,11 +5782,11 @@ window.selectCheckoutPayment=function(btn){
               </div>
               <div class="profile-row">
                 <label>Jenis Kelamin</label>
-                <div class="profile-readonly">Belum diatur</div>
+                <div><select id="profileGender" class="profile-select"><option value="">Belum diatur</option><option value="male">Laki-laki</option><option value="female">Perempuan</option><option value="other">Lainnya</option></select></div>
               </div>
               <div class="profile-row">
                 <label>Tanggal Lahir</label>
-                <div class="profile-readonly">-</div>
+                <div><input id="profileBirthDate" type="date" autocomplete="bday"></div>
               </div>
               <div class="profile-actions">
                 <button class="profile-save" type="button" onclick="saveMarketKitaProfile()">Simpan</button>
@@ -8495,6 +8502,8 @@ function populateAccountProfile(){
   setText("profileRole",String(profile?.role || "buyer").toUpperCase());
   if(typeof applyMarketKitaAvatar==="function") applyMarketKitaAvatar(String(user.user_metadata?.avatar_url || ""));
   setText("profileStore",profile?.role==="seller" || profile?.role==="admin" ? "MarketKita" : "-");
+  set("profileGender",String(profile?.gender || user.user_metadata?.gender || ""));
+  set("profileBirthDate",String(profile?.birth_date || user.user_metadata?.birth_date || ""));
 }
 
 function showAccountSection(section){
@@ -8542,7 +8551,12 @@ async function saveMarketKitaProfile(){
   try{
     const result=await kwSupabase
       .from("profiles")
-      .update({full_name:fullName,phone:phone||null})
+      .update({
+        full_name:fullName,
+        phone:phone||null,
+        gender:String(document.getElementById("profileGender")?.value||"")||null,
+        birth_date:String(document.getElementById("profileBirthDate")?.value||"")||null
+      })
       .eq("id",kwCurrentUser.id);
 
     if(result.error) throw result.error;
@@ -8562,12 +8576,14 @@ async function saveMarketKitaProfile(){
       data:{
         ...(kwCurrentUser.user_metadata||{}),
         username,
-        avatar_url:avatarUrl
+        avatar_url:avatarUrl,
+        gender:String(document.getElementById("profileGender")?.value||""),
+        birth_date:String(document.getElementById("profileBirthDate")?.value||"")
       }
     });
     if(authUpdate.error) throw authUpdate.error;
     kwCurrentUser=authUpdate.data?.user || {...kwCurrentUser,user_metadata:{...(kwCurrentUser.user_metadata||{}),username,avatar_url:avatarUrl}};
-    kwCurrentProfile={...(kwCurrentProfile||{}),full_name:fullName,phone:phone||null};
+    kwCurrentProfile={...(kwCurrentProfile||{}),full_name:fullName,phone:phone||null,gender:String(document.getElementById("profileGender")?.value||"")||null,birth_date:String(document.getElementById("profileBirthDate")?.value||"")||null};
     updateAccountButton(kwCurrentUser,kwCurrentProfile);
     populateAccountProfile();
     applyMarketKitaAvatar(avatarUrl);
