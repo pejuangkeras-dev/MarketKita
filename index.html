@@ -4572,7 +4572,8 @@ body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
 <style id="marketkita-final-design-lock">
 /* FINAL DESIGN LOCK — supplied MarketKita reference replaces the rotating legacy hero presentation. */
 .mk2-slider .mk2-slide{display:none!important}
-.mk2-slider .mk2-slide[data-slide="0"]{display:block!important}
+.mk2-slider .mk2-slide[data-slide="0"]{display:block!important;opacity:1!important;visibility:visible!important;transform:translateX(0)!important}
+.mk2-slider .mk2-slide[data-slide="0"] .mk2-hero-copy{display:block!important;opacity:1!important;visibility:visible!important}
 .mk2-slider .mk2-slider-dots{display:none!important}
 .mk2-hero-main{overflow:hidden!important}
 .mk2-hero-main,.mk2-side,.mk2-cat-card,.mk2-flash,.mk2-sale-card,#produk .card,#rekomendasi .card{box-shadow:0 6px 22px rgba(27,73,126,.08)!important}
@@ -9422,58 +9423,25 @@ window.marketKitaGetCurrentUser=()=>kwCurrentUser;
   window.marketKitaBindMenus=bindMarketplaceMenus;
 })();
 </script>
-<script id="marketkita-hero-slider-final-js">
+<script id="marketkita-hero-static-final-js">
 (function(){
-  function initMarketKitaHeroSlider(){
+  function lockMarketKitaHero(){
     const root=document.querySelector(".mk2-slider");
-    if(!root || root.dataset.sliderReady)return;
+    if(!root) return;
     const slides=[...root.querySelectorAll(".mk2-slide")];
-    const dots=[...root.querySelectorAll(".mk2-slider-dots button")];
-    if(slides.length<2)return;
-    root.dataset.sliderReady="1";
-    let index=0;
-    let timer=null;
-    const setSlide=(next,announce=true)=>{
-      index=(next+slides.length)%slides.length;
-      slides.forEach((slide,i)=>{
-        const active=i===index;
-        slide.classList.toggle("is-active",active);
-        slide.setAttribute("aria-hidden",active?"false":"true");
-      });
-      dots.forEach((dot,i)=>{
-        const active=i===index;
-        dot.classList.toggle("is-active",active);
-        dot.setAttribute("aria-selected",active?"true":"false");
-      });
-    };
-    const restart=()=>{
-      if(timer)clearInterval(timer);
-      timer=setInterval(()=>setSlide(index+1,false),5000);
-    };
-    dots.forEach((dot,i)=>{
-      dot.addEventListener("click",()=>{
-        setSlide(i);
-        restart();
-      });
+    slides.forEach((slide,i)=>{
+      const active=i===0;
+      slide.classList.toggle("is-active",active);
+      slide.setAttribute("aria-hidden",active?"false":"true");
+      slide.style.display=active?"block":"none";
+      slide.style.opacity=active?"1":"0";
+      slide.style.visibility=active?"visible":"hidden";
+      slide.style.transform="translateX(0)";
     });
-    root.addEventListener("mouseenter",()=>{if(timer)clearInterval(timer)});
-    root.addEventListener("mouseleave",restart);
-    root.addEventListener("focusin",()=>{if(timer)clearInterval(timer)});
-    root.addEventListener("focusout",e=>{if(!root.contains(e.relatedTarget))restart()});
-    let startX=null;
-    root.addEventListener("touchstart",e=>{startX=e.touches[0]?.clientX??null},{passive:true});
-    root.addEventListener("touchend",e=>{
-      if(startX===null)return;
-      const endX=e.changedTouches[0]?.clientX??startX;
-      if(Math.abs(endX-startX)>45)setSlide(index+(endX<startX?1:-1));
-      startX=null;
-      restart();
-    },{passive:true});
-    setSlide(0);
-    restart();
+    root.querySelector(".mk2-slider-dots")?.remove();
   }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(initMarketKitaHeroSlider,150));
-  else setTimeout(initMarketKitaHeroSlider,150);
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>setTimeout(lockMarketKitaHero,80));
+  else setTimeout(lockMarketKitaHero,80);
 })();
 </script>
 <div id="mk2CustomerService" class="mk2-cs">
