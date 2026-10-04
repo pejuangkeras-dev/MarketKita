@@ -5942,7 +5942,7 @@ async function loadMarketKitaProductsFromDatabase(){
             .filter(x=>Number(x?.stock ?? 0)>0)
             .map(x=>String(x.size || "").trim().toUpperCase())
             .filter(Boolean)
-        : ["M","L","XL","XXL"]
+        : []
     })).filter(p=>p.name && p.price>0 && p.img);
 
     if(dynamicProducts.length){
@@ -6408,7 +6408,7 @@ function openProductDetail(i){
         </div>
         <div class="seller-card" data-store-id="${escDetail(store.id||"")}">
           <div class="seller-card-top"><div class="seller-avatar">${escDetail(initial)}</div><div class="seller-meta"><strong>${escDetail(storeName)}</strong><span>${escDetail(store.slug?"@"+store.slug:"Toko MarketKita")} · ${store.description?escDetail(store.description):"Seller MarketKita"}</span></div><div class="seller-rating"><strong id="detailSellerRating">—</strong><span id="detailSellerReviewCount">0 ulasan</span></div></div>
-          <div class="p2-seller-stats"><span><b id="detailSellerRating">—</b> Rating</span><span><b id="detailSellerReviewCount">0</b> Ulasan</span><span><b>${productStoreProducts(p.store_id).length}</b> Produk</span></div>
+          <div class="p2-seller-stats"><span><b>—</b> Rating</span><span><b>—</b> Ulasan</span><span><b>${productStoreProducts(p.store_id).length}</b> Produk</span></div>
           <div class="seller-actions"><button type="button" onclick="openSellerChat()">💬 Chat Seller</button><a class="p2-store-link" href="/store.html?slug=${encodeURIComponent(store.slug||"")}">🏪 Kunjungi Toko</a><button type="button" onclick="scrollProductDetailTo('sellerReviewSection')">★ Ulasan Toko</button></div>
         </div>
       </div>
