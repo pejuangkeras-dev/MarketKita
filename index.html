@@ -5152,6 +5152,49 @@ window.selectCheckoutPayment=function(btn){
   #checkoutModal .p3-order-store-head{padding:8px 9px}
 }
 </style>
+<style id="marketkita-p4-cart">
+/* P4 — Marketplace multi-seller cart */
+#drawer{z-index:220!important}
+#drawer .cart-panel{width:min(560px,96vw)!important;background:#f5f8fc!important;border-left:1px solid #dce7f3!important}
+#drawer .cart-header{position:sticky!important;top:0!important;z-index:5!important;background:#fff!important;border-bottom:1px solid #e1eaf3!important}
+#drawer .cart-items{padding:10px 12px!important}
+.p4-cart-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 12px 8px;padding:8px 10px;border:1px solid #dce7f3;border-radius:9px;background:#fff}
+.p4-select-all{display:flex;align-items:center;gap:7px;font-size:8px;font-weight:850;color:#17345c;cursor:pointer}
+.p4-select-all input{accent-color:#1769e8}
+.p4-cart-count{font-size:7px;color:#8292a8}
+.p4-store-group{margin:8px 0;border:1px solid #dce7f3;border-radius:11px;background:#fff;overflow:hidden}
+.p4-store-head{display:flex;align-items:center;gap:7px;padding:9px 10px;background:#f7fbff;border-bottom:1px solid #e6eef6}
+.p4-store-head input{accent-color:#1769e8}
+.p4-store-head strong{font-size:9px;color:#17345c}
+.p4-store-head small{margin-left:auto;color:#8796a9;font-size:7px}
+.p4-store-items{padding:0 9px}
+.p4-cart-item{display:grid;grid-template-columns:20px 58px minmax(0,1fr);gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #edf2f7}
+.p4-cart-item:last-child{border-bottom:0}
+.p4-cart-check{accent-color:#1769e8}
+.p4-cart-thumb{width:58px;height:58px;border-radius:8px;overflow:hidden;background:#f2f6fa}
+.p4-cart-thumb img{width:100%;height:100%;object-fit:cover}
+.p4-cart-name{font-size:9px;font-weight:850;color:#17345c;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.p4-cart-meta{font-size:7px;color:#8292a8;margin-top:3px}
+.p4-cart-price{font-size:10px;font-weight:950;color:#1769e8;margin-top:4px}
+.p4-cart-actions{display:flex;align-items:center;gap:5px;margin-top:5px}
+.p4-cart-actions button{height:25px;min-width:25px;padding:0 7px;border:1px solid #d7e2ee;border-radius:6px;background:#fff;color:#17345c;font-weight:900}
+.p4-cart-actions .p4-remove{margin-left:auto;border:0;color:#b05a63;background:#fff1f2}
+.p4-store-subtotal{display:flex;justify-content:space-between;padding:8px 10px;background:#fafcff;border-top:1px solid #edf2f7;font-size:8px;color:#72839a}
+.p4-store-subtotal strong{color:#17345c}
+.p4-cart-voucher{display:flex;gap:7px;align-items:center;margin:8px 12px;padding:9px 10px;border:1px solid #dce7f3;border-radius:9px;background:#fff}
+.p4-cart-voucher span{font-size:9px;color:#1769e8}
+.p4-cart-voucher button{margin-left:auto;border:0;background:transparent;color:#1769e8;font-size:8px;font-weight:850}
+.p4-cart-summary{margin:8px 12px 0;padding:11px;border:1px solid #dce7f3;border-radius:10px;background:#fff}
+.p4-summary-row{display:flex;justify-content:space-between;font-size:8px;color:#71839a;margin:5px 0}
+.p4-summary-row strong{color:#17345c}
+.p4-summary-row.total{padding-top:8px;border-top:1px solid #edf2f7;font-size:10px}
+.p4-summary-row.total strong{font-size:14px;color:#1769e8}
+#drawer .checkout-btn{margin:9px 12px 15px!important;width:calc(100% - 24px)!important;height:44px!important;border-radius:9px!important;background:#1769e8!important;color:#fff!important;font-weight:950!important}
+#drawer .checkout-btn:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:560px){
+ #drawer .cart-panel{width:100vw!important}.p4-cart-item{grid-template-columns:20px 62px minmax(0,1fr)}
+}
+</style>
 </head>
 
 <body>
@@ -6834,64 +6877,89 @@ function updateCart(){
   const mk2Badge=document.getElementById("mk2CartBadge");
   const cartItems=document.getElementById("cartItems");
   const total=document.getElementById("total");
-  // The redesigned marketplace header no longer uses the legacy #count node.
-  // Do not abort cart rendering just because that legacy badge is absent.
-  if(!cartItems || !total) return;
+  if(!cartItems||!total)return;
 
-  const itemCount=cart.reduce((s,x)=>s+Number(x.quantity||0),0);
-  if(count) count.textContent=itemCount;
+  const itemCount=cart.reduce((sum,x)=>sum+Number(x.quantity||0),0);
+  if(count)count.textContent=itemCount;
   if(mk2Badge){
     mk2Badge.textContent=itemCount;
     mk2Badge.style.display=itemCount>0?"inline-flex":"none";
     mk2Badge.setAttribute("aria-label",itemCount+" produk di keranjang");
   }
 
-  cartItems.innerHTML=cart.length
-    ? cart.map((x,i)=>`
-      <div class="item">
-        <div class="item-thumb">
-          <img src="${optimizeProductImage(products[x.productIndex]?.img || "",180,180,68)}" data-fallback-src="${products[x.productIndex]?.img || ""}" alt="${x.name}" loading="lazy" decoding="async">
-        </div>
-        <div class="item-content">
-          <div class="item-name">${x.name}</div>
-          <div class="item-meta">
-            ${x.size
-              ? `${t("size_label")}: <strong>${x.size}</strong>`
-              : `<label style="font-size:11px;font-weight:800;display:block;margin-bottom:5px">${t("size_label")}</label>
-                 <select class="cart-size-select" onchange="setCartItemSize(${i},this.value)">
-                   <option value="">Pilih ukuran</option>
-                   ${(()=>{
-  const cp=products[x.productIndex]||{};
-  const cat=String(cp.category||"").trim().toLowerCase();
-  const clothingCategories=["t-shirt","tshirt","tee","shirt","kaos","kemeja","jacket","jaket","hoodie","sweater","cardigan","dress","celana","pants","jeans","rok","skirt","pakaian","clothing","apparel","outerwear"];
-  const isClothing=clothingCategories.some(x=>cat===x||cat.includes(x));
-  const sizes=[...(cp.sizes||[])];
-  if(isClothing){
-    const order={M:1,L:2,XL:3,XXL:4};
-    sizes.sort((a,b)=>{
-      const aa=String(a).trim().toUpperCase(),bb=String(b).trim().toUpperCase();
-      return (order[aa]||99)-(order[bb]||99);
-    });
+  if(!cart.length){
+    cartItems.innerHTML='<div class="p4-empty-cart"><div style="font-size:30px">🛒</div><strong>Keranjang masih kosong</strong><small>Tambahkan produk favorit Anda untuk mulai berbelanja.</small></div>';
+    total.textContent=rupiah(0);
+    renderP4CartShell(0,0);
+    return;
   }
-  return sizes.map(s=>`<option value="${escDetail(s)}">${escDetail(s)}</option>`).join("");
-})()}
-                 </select>`
-            } · ${rupiah(x.price)}
-          </div>
-          <div class="item-actions">
-            <button class="qtybtn" onclick="changeQty(${i},-1)" aria-label="Kurangi jumlah">−</button>
-            <strong>${x.quantity}</strong>
-            <button class="qtybtn" onclick="changeQty(${i},1)" aria-label="Tambah jumlah">+</button>
-            <button class="remove" onclick="removeItem(${i})" aria-label="Hapus produk">×</button>
-          </div>
-        </div>
-      </div>
-    `).join("")
-    : `<p style="color:#666">${t("cart_empty")}</p>`;
 
-  total.textContent=rupiah(cart.reduce((s,x)=>s+x.price*x.quantity,0));
+  const groups=new Map();
+  cart.forEach((x,i)=>{
+    const p=products[x.productIndex]||{};
+    const key=String(x.store_id||p.store_id||"unknown");
+    if(!groups.has(key))groups.set(key,{key,name:String(p.store?.name||x.store_name||"Toko MarketKita"),items:[]});
+    groups.get(key).items.push({x,i,p});
+  });
+
+  cartItems.innerHTML=[...groups.values()].map(g=>{
+    const checked=g.items.every(({i})=>cart[i]._selected!==false);
+    const subtotal=g.items.reduce((sum,{x})=>sum+Number(x.price||0)*Number(x.quantity||0),0);
+    return '<section class="p4-store-group" data-store="'+escDetail(g.key)+'">'+
+      '<div class="p4-store-head"><input type="checkbox" '+(checked?'checked':'')+' onchange="toggleCartStore(''+escDetail(g.key)+'',this.checked)" aria-label="Pilih semua produk dari '+escDetail(g.name)+'">'+
+      '<span>🏪</span><strong>'+escDetail(g.name)+'</strong><small>'+g.items.length+' produk</small></div>'+
+      '<div class="p4-store-items">'+g.items.map(({x,i,p})=>{
+        const selected=x._selected!==false;
+        return '<div class="p4-cart-item">'+
+          '<input class="p4-cart-check" type="checkbox" '+(selected?'checked':'')+' onchange="toggleCartItem('+i+',this.checked)" aria-label="Pilih '+escDetail(x.name)+'">'+
+          '<div class="p4-cart-thumb"><img src="'+escDetail(optimizeProductImage(p.img||"",180,180,68))+'" data-fallback-src="'+escDetail(p.img||"")+'" alt="'+escDetail(x.name)+'" loading="lazy"></div>'+
+          '<div><div class="p4-cart-name">'+escDetail(x.name)+'</div><div class="p4-cart-meta">'+(x.size?escDetail(t("size_label")+": "+x.size):"Variasi standar")+(x.color?" · "+escDetail(x.color):"")+'</div>'+
+          '<div class="p4-cart-price">'+rupiah(x.price)+'</div><div class="p4-cart-actions">'+
+          '<button type="button" onclick="changeQty('+i+',-1)" aria-label="Kurangi">−</button><strong style="min-width:20px;text-align:center;font-size:8px">'+Number(x.quantity||1)+'</strong><button type="button" onclick="changeQty('+i+',1)" aria-label="Tambah">+</button>'+
+          '<button type="button" class="p4-remove" onclick="removeItem('+i+')" aria-label="Hapus produk">Hapus</button></div></div></div>';
+      }).join("")+'</div><div class="p4-store-subtotal"><span>Subtotal toko</span><strong>'+rupiah(subtotal)+'</strong></div></section>';
+  }).join("");
+
+  const selectedSubtotal=cart.reduce((sum,x)=>x._selected!==false?sum+Number(x.price||0)*Number(x.quantity||0):sum,0);
+  const selectedCount=cart.reduce((sum,x)=>x._selected!==false?sum+Number(x.quantity||0):sum,0);
+  renderP4CartShell(selectedSubtotal,selectedCount);
 }
 
+function renderP4CartShell(subtotal,count){
+  const panel=document.querySelector("#drawer .cart-panel");if(!panel)return;
+  let toolbar=panel.querySelector(".p4-cart-toolbar");
+  if(!toolbar){
+    toolbar=document.createElement("div");toolbar.className="p4-cart-toolbar";
+    const items=panel.querySelector(".cart-items");if(items)items.insertAdjacentElement("beforebegin",toolbar);
+  }
+  const all=cart.length>0&&cart.every(x=>x._selected!==false);
+  toolbar.innerHTML='<label class="p4-select-all"><input type="checkbox" '+(all?'checked':'')+' onchange="toggleCartAll(this.checked)"> Pilih semua</label><span class="p4-cart-count">'+count+' item dipilih</span>';
+
+  let voucher=panel.querySelector(".p4-cart-voucher");
+  if(!voucher){
+    voucher=document.createElement("div");voucher.className="p4-cart-voucher";
+    voucher.innerHTML='<span>🏷️</span><strong style="font-size:8px;color:#17345c">Voucher</strong><button type="button" onclick="openVoucherFromCart()">Lihat voucher ›</button>';
+    const totalRow=panel.querySelector(".total-row");if(totalRow)totalRow.insertAdjacentElement("beforebegin",voucher);
+  }
+
+  let summary=panel.querySelector(".p4-cart-summary");
+  if(!summary){
+    summary=document.createElement("div");summary.className="p4-cart-summary";
+    const totalRow=panel.querySelector(".total-row");if(totalRow)totalRow.insertAdjacentElement("beforebegin",summary);
+  }
+  summary.innerHTML='<div class="p4-summary-row"><span>Produk dipilih</span><strong>'+count+'</strong></div><div class="p4-summary-row"><span>Subtotal</span><strong>'+rupiah(subtotal)+'</strong></div><div class="p4-summary-row"><span>Ongkir</span><strong>Dihitung saat checkout</strong></div><div class="p4-summary-row total"><span>Total sementara</span><strong>'+rupiah(subtotal)+'</strong></div>';
+  const totalEl=document.getElementById("total");if(totalEl)totalEl.textContent=rupiah(subtotal);
+  const checkoutBtn=panel.querySelector(".checkout-btn");if(checkoutBtn)checkoutBtn.disabled=!count;
+}
+
+function toggleCartItem(i,checked){if(!cart[i])return;cart[i]._selected=Boolean(checked);updateCart();}
+function toggleCartStore(storeKey,checked){
+  cart.forEach((x,i)=>{const p=products[x.productIndex]||{};const key=String(x.store_id||p.store_id||"unknown");if(key===String(storeKey))x._selected=Boolean(checked);});updateCart();
+}
+function toggleCartAll(checked){cart.forEach(x=>x._selected=Boolean(checked));updateCart();}
+function openVoucherFromCart(){
+  showKwNotice("Voucher dapat dipilih atau diterapkan pada tahap checkout.","Voucher MarketKita");
+}
 function setCartItemSize(i,size){
   if(!cart[i])return;
   const normalized=String(size||"").trim().toUpperCase();
@@ -7725,6 +7793,25 @@ async function validateCheckoutVoucher(){
   if(claim.data.used_at){window.marketCheckoutVoucherId=null;if(msg)msg.textContent="Voucher sudah digunakan.";return;}
   window.marketCheckoutVoucherId=data.id;
   if(msg)msg.textContent="Voucher "+data.code+" siap digunakan. Nilai akhir akan dihitung server.";
+}
+function prepareSelectedCartForCheckout(){
+  const selected=cart.filter(x=>x._selected!==false);
+  if(!selected.length){showKwNotice("Pilih minimal satu produk untuk checkout.","Keranjang");return false;}
+  window.__checkoutCartSnapshot=cart;
+  cart=selected.map(x=>({...x}));
+  return true;
+}
+function restoreCartAfterCheckoutClose(){
+  if(Array.isArray(window.__checkoutCartSnapshot)){
+    const selectedIds=new Set(cart.map(x=>String(x.product_id||x.productIndex)+"|"+String(x.size||"")+"|"+String(x.color||"")));
+    window.__checkoutCartSnapshot.forEach(original=>{
+      const key=String(original.product_id||original.productIndex)+"|"+String(original.size||"")+"|"+String(original.color||"");
+      if(!selectedIds.has(key)&&original._selected!==false)original._selected=true;
+    });
+    cart=window.__checkoutCartSnapshot;
+    window.__checkoutCartSnapshot=null;
+    updateCart();
+  }
 }
 function openCheckout(){
   if(!cart.length){
